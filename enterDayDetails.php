@@ -1,48 +1,82 @@
-<?php session_start();
-    if ( !is_writable(session_save_path()) ) {
-       echo 'Session save path "'.session_save_path().'" is not writable!'; 
+<?php
+    require("config.php");
+    if(empty($_SESSION['user']))
+    {
+        header("Location: index.php");
+        die("Redirecting to index.php");
     }
-    ini_set('display_errors', 'on'); error_reporting(-1);
-     ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>EnterDayData </title>
-    </head>
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Vacation Welcome</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+        body { background: url(images/bglight.png); }
+        .hero-unit { background-color: #fff; }
+        .center { display: block; margin: 0 auto; }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand">Vacation</a>
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+          <!--<li><a href="register.php">Register</a></li>-->
+          <li class="divider-vertical"></li>
+          <li><a href="logout.php">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container hero-unit">
     <body>    <h3> navigation links </h3>
         <ul class="tabs" data-tab>
-          <li class="tab-title active"><a href="index.php">Tab IndexPage</a></li>
-          <li class="tab-title active"><a href="#">Tab EnterDayDetails</a></li
+          <li class="tab-title active"><a href="welcome.php">Back to Welcome</a></li>
       </ul>
 
    <h3> Use this form to enter/edit information for the selected day.  </h3> <br> <br>
    <body>
-  
+
         StartingLocation:  <input name="StartingLocation" size="15" type="text" />  <br><br>
         EndingLocation : <input name="EndingLocation" size="15" type="text" />  <br><br>
 
         </br> </br>
 
-        morningActivity : <TEXTAREA NAME="morningActivity" ROWS=3 COLS=30 > </TEXTAREA>  
+        morningActivity : <TEXTAREA NAME="morningActivity" ROWS=3 COLS=30 > </TEXTAREA>
         <option> RED (reservations not made/confirmed)</option>
         <option> GREEN (reservations confirmed)</option>
-        <option> YELLOW (no reservations needed) </option> 
+        <option> YELLOW (no reservations needed) </option>
         <br><br>
-        afternoonActivity: <TEXTAREA NAME="afternoonActivity" ROWS=3 COLS=30 > </TEXTAREA> 
+        afternoonActivity: <TEXTAREA NAME="afternoonActivity" ROWS=3 COLS=30 > </TEXTAREA>
         <option> RED (reservations not made/confirmed)</option>
         <option> GREEN (reservations confirmed)</option>
-        <option> YELLOW (no reservations needed) </option> 
+        <option> YELLOW (no reservations needed) </option>
         <br><br>
         eveningActivity : <TEXTAREA NAME="eveningActivity" ROWS=3 COLS=30 > </TEXTAREA>
         <option> RED (reservations not made/confirmed)</option>
         <option> GREEN (reservations confirmed)</option>
-        <option> YELLOW (no reservations needed) </option> 
+        <option> YELLOW (no reservations needed) </option>
         <br><br>
         lodging : <TEXTAREA NAME="lodging" ROWS=3 COLS=30 > </TEXTAREA>  <br><br>
         <option> RED (reservations not made/confirmed)</option>
         <option> GREEN (reservations confirmed)</option>
-        <option> YELLOW (no reservations needed) </option> 
+        <option> YELLOW (no reservations needed) </option>
         </br> </br></br>
 
         </br> </br>
@@ -50,6 +84,7 @@
         <?php
         // put your code here
         ?>
+</div>
 
    </body>
 </html>
