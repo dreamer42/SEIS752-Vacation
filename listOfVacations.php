@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand">Vacation</a>
+      <a href="welcome.php" class="brand">Vacation</a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
           <!--<li><a href="register.php">Register</a></li>-->
