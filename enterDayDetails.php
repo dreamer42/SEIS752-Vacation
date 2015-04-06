@@ -45,18 +45,14 @@
 </div>
 
 <div class="container hero-unit">
-    <body>    <h3> navigation links </h3>
-        <ul class="tabs" data-tab>
-          <li class="tab-title active"><a href="welcome.php">Back to Welcome</a></li>
-      </ul>
+    <body>
 
-   <h3> Use this form to enter/edit information for the selected day.  </h3> <br> <br>
-   <body>
+   <h3> Use this form to enter/edit information for the selected day. (select day id is <?php echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?>)  </h3> <br> <br>
 
         StartingLocation:  <input name="StartingLocation" size="15" type="text" />  <br><br>
         EndingLocation : <input name="EndingLocation" size="15" type="text" />  <br><br>
 
-        </br> </br>
+        <br><br>
 
         morningActivity : <TEXTAREA NAME="morningActivity" ROWS=3 COLS=30 > </TEXTAREA>
         <option> RED (reservations not made/confirmed)</option>
@@ -84,7 +80,6 @@
         <?php
         // put your code here
         ?>
+    </body>
 </div>
-
-   </body>
 </html>

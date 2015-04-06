@@ -45,7 +45,7 @@
 </div>
 
 <div class="container hero-unit">
-    <h2>TODO : enter vacation nick name and save to <bold>vacations<bold> table</h2>
+    <h2>Coming soon, the ability to create new vacations!</h2>
 </div>
 
 </body>

@@ -24,31 +24,32 @@ USE `seis752_vacation`;
 -- --------------------------------------------------------
 
 --
--- Drop table `users` is already there
+-- Drop table `status_def` is already there
 --
 
-DROP TABLE IF EXISTS `statusdef`;
+DROP TABLE IF EXISTS `status_def`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `statusdef`
+-- Table structure for table `status_def`
 --
 
-CREATE TABLE IF NOT EXISTS `statusdef` (
-  `number` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `status_def` (
+  `status_id` int(11) NOT NULL,
   `color` varchar(12) NOT NULL,
   `HEXcolor` varchar(12) NOT NULL,
   `description` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `statusdef`
+-- Dumping data for table `status_def`
 --
 
-INSERT INTO `statusdef` (`number`, `color`, `HEXcolor`, `description`) VALUES
+INSERT INTO `status_def` (`status_id`, `color`, `HEXcolor`, `description`) VALUES
 (1, 'red', 'FF3333', 'activity/lodging reservation not made'),
-(2, 'yellow', 'FFE16A', 'activity/lodging reservation may not confirmed'),
-(3, 'green', '70DB70', 'activity/lodging reservation is confirmed');
+(2, 'yellow', 'FFE16A', 'activity/lodging reservation needs confirmed'),
+(3, 'green', '70DB70', 'activity/lodging reservation is confirmed'),
+(4, 'light green', '9ae59a', 'activity/lodging reservation is not needed');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

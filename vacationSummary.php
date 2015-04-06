@@ -6,6 +6,35 @@
         die("Redirecting to index.php");
     }
 ?>
+
+<script>
+
+    window.addEventListener('load', loadVacationSummary, false);
+
+    function loadVacationSummary() {
+        $.ajax({
+            url: "vacationSummaryList.php",
+            cache: false
+        })
+            .done(function (html) {
+                document.getElementById("TheListOfDays").innerHTML = html;
+            });
+    }
+
+    function setCurrentVacationPlanId($vacationPlanId) {
+        $.ajax({
+            url: "setCurrentVacationPlanId.php",
+            cache: false,
+            async: false,
+            data: { vacationPlanId: $vacationPlanId }
+        })
+            .done(function (html) {
+                // just setting value, nothing to do here
+            });
+    }
+
+</script>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,7 +64,6 @@
       <a href="welcome.php" class="brand">Vacation</a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
-          <!--<li><a href="register.php">Register</a></li>-->
           <li class="divider-vertical"></li>
           <li><a href="logout.php">Log Out</a></li>
         </ul>
@@ -45,12 +73,11 @@
 </div>
 
 <div class="container hero-unit">
-    <h2>TODO : provide vacation details based on <bold>vacation_plan<bold> table</h2>
-	<p>Pretend we've got the summary and click through to details.</p>
-	<ul class="tabs" data-tab>
-		<li class="tab-title"><a href="enterDayDetails.php">pretend this is button for editing a row</a></li
-	</ul>
+    <h2>New cool features on summary coming soon.  For now click details to look at those days.</h2>
 </div>
+
+<div id="TheListOfDays" class="container hero-unit"></div>
+
 
 </body>
 </html>

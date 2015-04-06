@@ -1,6 +1,8 @@
 <?php 
-    require("config.php"); 
+    require("config.php");
     unset($_SESSION['user']);
-    header("Location: index.php"); 
+    unset($_SESSION['currentVacationId']);
+    unset($_SESSION['currentVacationPlanId']);
+    header("Location: index.php");
     die("Redirecting to: index.php");
 ?>
