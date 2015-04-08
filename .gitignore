@@ -10,3 +10,5 @@ SEIS752-Vacation.iml
 .idea/vcs.xml
 .idea/scopes/scope_settings.xml
 .idea/compiler.xml
+config.hosted.php
+config.local.php
