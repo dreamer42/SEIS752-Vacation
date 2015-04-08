@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `vacation_plan` (
   `evening` varchar(255) DEFAULT NULL,
   `evening_status` int(11) NOT NULL DEFAULT '1',
   `lodging` varchar(255) DEFAULT NULL,
-  `lodging_status` int(11) NOT NULL DEFAULT '1';
+  `lodging_status` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
