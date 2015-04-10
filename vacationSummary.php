@@ -21,7 +21,7 @@
             });
     }
 
-    function setCurrentVacationPlanId($vacationPlanId) {
+    function redirectToEnterDayDetails($vacationPlanId) {
         $.ajax({
             url: "setCurrentVacationPlanId.php",
             cache: false,
@@ -29,7 +29,7 @@
             data: { vacationPlanId: $vacationPlanId }
         })
             .done(function (html) {
-                // just setting value, nothing to do here
+                window.location.href = "enterDayDetails.php"
             });
     }
 
