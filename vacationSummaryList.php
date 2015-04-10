@@ -4,6 +4,26 @@ require("config.php");
 
     <?php
 
+    $colorQuery = "
+            SELECT
+              status_id,
+              HEXcolor
+            FROM status_def
+        ";
+
+    try{
+        $colorStmt = $db->prepare($colorQuery);
+        $colorResult = $colorStmt->execute();
+
+    }
+    catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
+    $colorArray = array();
+
+    while($colorRow = $colorStmt->fetch()){
+        $colorArray[$colorRow['status_id']] = $colorRow['HEXcolor'];
+    }
+
     $query = "
             SELECT
                 vacation_plan_id,
@@ -44,11 +64,11 @@ require("config.php");
         echo '<td>'.$row['travel_time'].'</td>';
         echo '<td>'.$row['starting_location'].'</td>';
         echo '<td>'.$row['ending_location'].'</td>';
-        echo '<td>'.$row['morning'].'</td>';
-        echo '<td>'.$row['afternoon'].'</td>';
-        echo '<td>'.$row['evening'].'</td>';
-        echo '<td>'.$row['lodging'].'</td>';
-        echo '<td><a href="enterDayDetails.php"><button type="button" onClick="setCurrentVacationPlanId(\'' . $row['vacation_plan_id'] . '\')">Details</a></button></td>';
+        echo '<td bgcolor=\''.$colorArray[$row['morning_status']].'\'">'.$row['morning'].'</td>';
+        echo '<td bgcolor=\''.$colorArray[$row['afternoon_status']].'\'">'.$row['afternoon'].'</td>';
+        echo '<td bgcolor=\''.$colorArray[$row['evening_status']].'\'">'.$row['evening'].'</td>';
+        echo '<td bgcolor=\''.$colorArray[$row['lodging_status']].'\'">'.$row['lodging'].'</td>';
+        echo '<td><button type="button" onClick="redirectToEnterDayDetails(\'' . $row['vacation_plan_id'] . '\')">Details</button></td>';
         echo '</tr>';
     }
     echo '</tbody>';
