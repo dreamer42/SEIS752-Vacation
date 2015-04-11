@@ -1,8 +1,5 @@
-<!-- Examples for setting up pretty login and registration pages found at http://untame.net/2013/06/how-to-build-a-functional-login-form-with-php-twitter-bootstrap/  written by Michael Milstead / Mode87.com for Untame.net Bootstrap Tutorial, 2013
-	 These page were used as a starting point on setting these pages update and were modified to meet our project needs.
--->
 <?php
-    require("config.php");
+  	require('config.php');
     $submitted_user_name = '';
     if(!empty($_POST)){
         $query = "
@@ -118,3 +115,8 @@
 
 </body>
 </html>
+
+
+<!-- Examples for setting up pretty login and registration pages found at http://untame.net/2013/06/how-to-build-a-functional-login-form-with-php-twitter-bootstrap/  written by Michael Milstead / Mode87.com for Untame.net Bootstrap Tutorial, 2013
+	 These page were used as a starting point on setting these pages update and were modified to meet our project needs.
+-->

@@ -10,4 +10,9 @@ SEIS752-Vacation.iml
 .idea/vcs.xml
 .idea/scopes/scope_settings.xml
 .idea/compiler.xml
+<<<<<<< HEAD
 /nbproject/private/
+=======
+config.hosted.php
+config.local.php
+>>>>>>> origin/master
