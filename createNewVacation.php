@@ -6,6 +6,53 @@
         die("Redirecting to index.php");
     }
 ?>
+
+
+<script>
+    function createNewVacation() {
+
+        // code below does the following:
+        // insert a record in vacation, uses the returning vacation id to set that value in session
+        // then insert a record in vacation plan, uses the return vacation plan id to set that value in the session
+        // lastly, it switches to the entry screen to fill in a newly created day in the vacation plan
+
+        $.ajax({
+            url: "insertVacation.php",
+            cache: false,
+            async: false,
+            data: { name: vacationName.value }
+        })
+            .done(function (vacationId) {
+                $.ajax({
+                    url: "setCurrentVacationId.php",
+                    cache: false,
+                    async: false,
+                    data: { vacationId: vacationId }
+                })
+                .done(function () {
+                    $.ajax({
+                        url: "insertVacationPlan.php",
+                        cache: false,
+                        async: false,
+                        data: { vacationId: vacationId, rowNumber: 1 }
+                    })
+                    .done(function (vacationPlanId) {
+                        $.ajax({
+                            url: "setCurrentVacationPlanId.php",
+                            cache: false,
+                            async: false,
+                            data: { vacationPlanId: vacationPlanId }
+                        })
+                        .done(function () {
+                            window.location.href = "enterDayDetails.php"
+                        });
+                    });
+                })
+            });
+    }
+
+</script>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,6 +93,14 @@
 
 <div class="container hero-unit">
     <h2>Coming soon, the ability to create new vacations!</h2>
+    <form id="newVacation" name="newVacation" method="get" >
+        <label>Vacation Name:
+            <input type="text" name="vacationName" id="vacationName" value="" />
+        </label>
+        <label>
+            <button type="button" onclick="createNewVacation()">Create Vacation</button>
+        </label>
+    </form>
 </div>
 
 </body>
