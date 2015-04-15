@@ -28,14 +28,33 @@
     
     <script type="text/javascript">  //language="javascript" 
     function addtext() { 
-        //www.mediacollege.com/internet/javascript/form/add-text.html
-        //var newtext = "some newtext";
-        var newtext = document.myform.morningActivity.value ;
+
+        var newtext =  document.getElementById("morningActivity").value ;  // this will echo out the default value
+        newtext = newtext + ", " + document.getElementById("afternoonActivity").value ;
         alert( newtext);
-       // document.myform.morningActivity.value = newtext;
-        //enterDayDetails.myform.morningActivity.value = "some newtext";
-       // document.forms['myform'].elements['morningActivity'].value = txt;
-      // this.form.elements["morningActivity"].value = 'Some Value';
+
+    }
+    function updateVacationPlan() { //($vacationId)
+  
+        var A = document.getElementById("startingLocation").value;
+        // alert( A );
+        $.ajax({
+            type: "GET",
+            url: "setDayDetails.php",
+            cache: false,
+            async: false,
+            data: { vacationId: $vacationPlanId,
+                    startingLocation: document.getElementById("startingLocation").value,
+                    endingLocation:  document.getElementById("endingLocation").value,
+                    morningActivity: document.getElementById("morningActivity").value,
+                    afternoonActivity: document.getElementById("afternoonActivity").value, 
+                    eveningActivity: document.getElementById("eveningActivity").value,
+                    lodging: document.getElementById("eveningActivity").value      
+                }
+        })
+            .done(function (html) {
+                window.location.href = "setDayDetails.php"
+            });
     }
     </script>
 </head>
@@ -64,32 +83,32 @@
 
 <!--  <div class="container hero-unit" id="divX">  
     <body>  -->
-
+   </br> </br> </br> </br>
    <h3> Use this form to enter/edit information for the selected day. (select day id is <?php echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?>)  </h3> <br> <br>
-    <form name="myForm" id="myForm">  
-        StartingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text" />  <br><br>
-        EndingLocation : <input id="endingLocation"  name="endingLocation" size="15" type="text" />  <br><br>
+    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
+        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text" />  <br><br>
+        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text" />  <br><br>
 
-        <br><br>
+        <br>
 
-        morningActivity : <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 >Wake Up </textarea >
+        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 >Wake Up </textarea >
 
         <br><br>
         afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 > {{article}}</textarea >
 
         <br><br>
-        eveningActivity : <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 >ABC </textarea >
+        eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 >ABC </textarea >
 
         <br><br>
-        lodging : <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 > </textarea >  <br><br>
+        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 > </textarea >  <br><br>
         <option> RED (reservations not made/confirmed)</option>
         <option> GREEN (reservations confirmed)</option>
         <option> YELLOW (no reservations needed) </option>
         
         </br> </br>
      
-        <!--     <input name="submit"  id="submit" type="button"  value="Submit"   />  -->
-      <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  
+        <input name="Submit" type="submit" value="Submit" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  
+      <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
      </form>
    
       <form action="fetchVacationRow.php" method="POST"> 
