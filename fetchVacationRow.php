@@ -1,12 +1,8 @@
 <?php
 require("config.php");
 ini_set('display_errors', 'on'); error_reporting(-1);
-echo '$_SESSION[currentVacationPlanId] =    '; echo $_SESSION['currentVacationPlanId']; echo '</br>';
+//echo '$_SESSION[currentVacationPlanId] =    '; echo $_SESSION['currentVacationPlanId']; echo '</br>';
 ?>
-<!DOCTYPE html>
-     <head>
-        <title>fetchVacationRow Page</title>
-    </head>
 <?php
  'echo "in fetchVacationRow")';
    $query = "
@@ -33,16 +29,17 @@ echo '$_SESSION[currentVacationPlanId] =    '; echo $_SESSION['currentVacationPl
     $query_params = array(
         ':vacationPlanId' => $_SESSION['currentVacationPlanId']
     );
-echo '$query = '; echo $query;  echo '</br></br>';
+//echo '$query = '; echo $query;  echo '</br></br>';
 //echo '$query_params = '; echo $query_params;  echo '</br></br>';
     try{
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
       $resultArray = array(); 
     while($row = $stmt->fetch()){
-      $resultArray[] = array_map('uft8_encode', $row );
+      $resultArray[] = $row; //array_map('uft8_encode', $row );
  /*
        echo $row['vacation_plan_id'];echo'  '; echo $row['vacation_id'];echo'  ';echo $row['row_number'];echo '</br>';
        echo $row['day_date'];echo'  '; echo $row['travel_time'];echo'  ';echo $row['starting_location'];echo '</br>'; 
@@ -64,4 +61,3 @@ echo '$query = '; echo $query;  echo '</br></br>';
 
     
     ?>
-</html>

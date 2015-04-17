@@ -10,6 +10,69 @@
 ?>
 
 
+<script>
+
+    window.addEventListener('load', loadEnterDayDetails, false);
+
+    function loadEnterDayDetails() {
+        $.ajax({
+            url: "fetchVacationRow.php",
+            cache: false
+        })
+            .done(function (result) {
+                alert("RESULTS: "+result);
+
+                //decode the JSON object received
+                var dataReturned = JSON.parse(result);
+                document.getElementById("startingLocation").value = dataReturned[0].starting_location;
+//                document.getElementById("endingLocation").value = endingLocation:
+//                document.getElementById("morningActivity").value = morningActivity:
+//                document.getElementById("afternoonActivity").value = afternoonActivity:
+//                document.getElementById("eveningActivity").value =  eveningActivity:
+//                document.getElementById("eveningActivity").value = lodging:
+            });
+    }
+
+</script>
+
+<script>
+
+    function addtext() {
+
+        var newtext =  document.getElementById("morningActivity").value ;  // this will echo out the default value
+        newtext = newtext + ", " + document.getElementById("afternoonActivity").value ;
+        alert( newtext);
+
+    }
+    function updateVacationPlan() {
+
+        $.ajax({
+            type: "GET",
+            url: "setDayDetails.php",
+            cache: false,
+            async: false,
+            data: { vacationPlanId: $vacationPlanId,
+                startingLocation: document.getElementById("startingLocation").value,
+                endingLocation:  document.getElementById("endingLocation").value,
+                morningActivity: document.getElementById("morningActivity").value,
+                afternoonActivity: document.getElementById("afternoonActivity").value,
+                eveningActivity: document.getElementById("eveningActivity").value,
+                lodging: document.getElementById("eveningActivity").value
+            },
+            dataType: 'html'
+        })
+            .done(function (html) {
+                window.location.href = "vacationSummary.php";
+            });
+    .fail(jqXHR, textStatus, errorThrown) {
+            alert("failed");
+        });
+    }
+</script>
+
+
+
+
 <!doctype html>
 <!-- <html lang="en">   -->
 <head>
@@ -26,59 +89,6 @@
         .center { display: block; margin: 0 auto; }
     </style>
     
-    <script> 
-        
-    window.addEventListener('load', loadEnterDayDetails, false);
-
-    function loadEnterDayDetails() {
-        $.ajax({
-            url: "fetchVacationRow.php",
-            cache: false
-        })
-            .done(function (result) {     
-                
-                //decode the JSON object received
-                var dataReturned = JSON.parse(result);
-                document.getElementById("startingLocation").value = dataReturned[0]; 
-                document.getElementById("endingLocation").value = endingLocation:  
-                document.getElementById("morningActivity").value = morningActivity: 
-                document.getElementById("afternoonActivity").value = afternoonActivity:  
-                document.getElementById("eveningActivity").value =  eveningActivity: 
-                document.getElementById("eveningActivity").value = lodging: 
-            });
-    }
-    function addtext() { 
-
-        var newtext =  document.getElementById("morningActivity").value ;  // this will echo out the default value
-        newtext = newtext + ", " + document.getElementById("afternoonActivity").value ;
-        alert( newtext);
-
-    }
-    function updateVacationPlan() { 
-
-        $.ajax({
-            type: "GET",
-            url: "setDayDetails.php",
-            cache: false,
-            async: false,
-            data: { vacationPlanId: $vacationPlanId,
-                    startingLocation: document.getElementById("startingLocation").value,
-                    endingLocation:  document.getElementById("endingLocation").value,
-                    morningActivity: document.getElementById("morningActivity").value,
-                    afternoonActivity: document.getElementById("afternoonActivity").value, 
-                    eveningActivity: document.getElementById("eveningActivity").value,
-                    lodging: document.getElementById("eveningActivity").value      
-                },
-            dataType: 'html'
-        })
-            .done(function (html) {    
-                window.location.href = "vacationSummary.php";
-            });
-            .fail(jqXHR, textStatus, errorThrown) {
-                alert("failed");
-           });
-    }
-    </script>
 </head>
 
 <body>
@@ -133,7 +143,7 @@
       <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
      </form>
    
-      <form action="fetchVacationRow.php" method="POST"> 
+      <form action="fetchVacationRow.php" method="POST">
            rowID: <input id="fetchRow"  name="fetchRow"  type="text" value="FetchRow"  />  <br><br>
          <input type="submit" value="Submit"/> 
       </form>      
