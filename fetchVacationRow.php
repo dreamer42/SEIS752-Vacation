@@ -40,30 +40,28 @@ echo '$query = '; echo $query;  echo '</br></br>';
         $result = $stmt->execute($query_params);
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
-       
+      $resultArray = array(); 
     while($row = $stmt->fetch()){
-       //echo $row['ending_location'];
-      // document.getElementById("endingLocation").html = $row['ending_location'];
-      
+      $resultArray[] = array_map('uft8_encode', $row );
+ /*
        echo $row['vacation_plan_id'];echo'  '; echo $row['vacation_id'];echo'  ';echo $row['row_number'];echo '</br>';
        echo $row['day_date'];echo'  '; echo $row['travel_time'];echo'  ';echo $row['starting_location'];echo '</br>'; 
        echo $row['ending_location'];echo'  '; echo $row['morning'];echo'  ';echo $row['morning_status'];echo '</br>';  
        echo $row['afternoon'];echo'  '; echo $row['afternoon_status'];echo'  ';echo $row['evening'];echo '</br>';  
        echo $row['evening_status'];echo'  '; echo $row['lodging'];echo'  ';echo $row['lodging_status'];echo '</br>';  
+*/
+    }
+     echo json_encode($resultArray);  //we send the array as JSON object
+       /*  http://stackoverflow.com/questions/22104811/return-json-object-from-mysql-query-using-json-encode
+        *  $encode = array();
 
-    }
-       
-    /* 
-      if (!($result = mysql_query($query,$connection))) {
-        die("Error at mysql_query");    
-    print("<TABLE BORDER>\n");
-    printf("<TR><TD>ID</TD><TD>senderID</TD><TD>message</TD><TD>timeStamp</TD><TD>receiverID</TD></TR>\n");
-    while ($row = mysql_fetch_array($result)) {
-        printf ("<TR><TD>%s</TD><TD>%s</TD><TD>%s</TD><TD>%s</TD><TD>%s</TD></TR>\n", $row[0], $row[1], $row[2], $row[3], $row[4]);
-    }
-    printf("</TABLE>\n");
-    mysql_free_result($result);
-  */
+            while($row = mysqli_fetch_assoc($result)) {
+               $encode[$row['question _text']][] = $row['answer_text'];
+            }
+
+            echo json_encode($encode);
+        */
+
     
     ?>
 </html>

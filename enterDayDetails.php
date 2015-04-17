@@ -27,6 +27,26 @@
     </style>
     
     <script> 
+        
+    window.addEventListener('load', loadEnterDayDetails, false);
+
+    function loadEnterDayDetails() {
+        $.ajax({
+            url: "fetchVacationRow.php",
+            cache: false
+        })
+            .done(function (result) {     
+                
+                //decode the JSON object received
+                var dataReturned = JSON.parse(result);
+                document.getElementById("startingLocation").value = dataReturned[0]; 
+                document.getElementById("endingLocation").value = endingLocation:  
+                document.getElementById("morningActivity").value = morningActivity: 
+                document.getElementById("afternoonActivity").value = afternoonActivity:  
+                document.getElementById("eveningActivity").value =  eveningActivity: 
+                document.getElementById("eveningActivity").value = lodging: 
+            });
+    }
     function addtext() { 
 
         var newtext =  document.getElementById("morningActivity").value ;  // this will echo out the default value
