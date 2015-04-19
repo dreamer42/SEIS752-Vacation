@@ -20,16 +20,16 @@
             cache: false
         })
             .done(function (result) {
-                alert("RESULTS: "+result);
+//                alert("RESULTS: "+result);
 
                 //decode the JSON object received
                 var dataReturned = JSON.parse(result);
                 document.getElementById("startingLocation").value = dataReturned[0].starting_location;
-//                document.getElementById("endingLocation").value = endingLocation:
-//                document.getElementById("morningActivity").value = morningActivity:
-//                document.getElementById("afternoonActivity").value = afternoonActivity:
-//                document.getElementById("eveningActivity").value =  eveningActivity:
-//                document.getElementById("eveningActivity").value = lodging:
+                document.getElementById("endingLocation").value = dataReturned[0].ending_location;
+                document.getElementById("morningActivity").value = dataReturned[0].morning;
+                document.getElementById("afternoonActivity").value = dataReturned[0].afternoon;
+                document.getElementById("eveningActivity").value =  dataReturned[0].evening;
+                document.getElementById("lodging").value = dataReturned[0].lodging;
             });
     }
 
@@ -57,7 +57,7 @@
                 morningActivity: document.getElementById("morningActivity").value,
                 afternoonActivity: document.getElementById("afternoonActivity").value,
                 eveningActivity: document.getElementById("eveningActivity").value,
-                lodging: document.getElementById("eveningActivity").value
+                lodging: document.getElementById("lodging").value
             },
             dataType: 'html'
         })
@@ -115,29 +115,50 @@
 
  <div class="container hero-unit" id="divX">  
     <body>
-   </br> </br> </br> </br>
-   <h3> Use this form to enter/edit information for the selected day. (select day id is <?php echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?>)  </h3> <br> <br>
-    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
+   </br> </br> </br> 
+   <h4> Use this form to enter/edit information for the selected day. (select day id is <?php echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?>)  </h4> 
+     <p>
+         <button type="button" class="btn btn-success"> </button> activity/lodging reservation not needed <br>
+        <button type="button" class="btn btn-success"> </button> activity/lodging reservation confirmed <br>
+        <button type="button" class="btn btn-warning"> </button> activity/lodging reservation needs confirmation <br>
+        <button type="button" class="btn btn-danger"> </button> activity/lodging reservation not made <br>
+     </p> <br><br>
+   
+   <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
         startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text" />  <br><br>
         endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text" />  <br><br>
 
         <br>
 
         morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 > </textarea >
-
+            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+              <button type="button" class="btn btn-success">. </button>
+              <button type="button" class="btn btn-warning">. </button>
+              <button type="button" class="btn btn-danger">. </button>
+            </div>
         <br><br>
         afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 > </textarea >
-
+            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+              <button type="button" class="btn btn-success">.</button>
+              <button type="button" class="btn btn-warning">.</button>
+              <button type="button" class="btn btn-danger">.</button>
+            </div>
         <br><br>
         eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 > </textarea >
-
+            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+              <button type="button" class="btn btn-success">.</button>
+              <button type="button" class="btn btn-warning">.</button>
+              <button type="button" class="btn btn-danger">.</button>
+            </div>
         <br><br>
-        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 > </textarea >  <br><br>
-        <option> RED (reservations not made/confirmed)</option>
-        <option> GREEN (reservations confirmed)</option>
-        <option> YELLOW (no reservations needed) </option>
+        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 > </textarea >
+            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+              <button type="button" class="btn btn-success">.</button>
+              <button type="button" class="btn btn-warning">.</button>
+              <button type="button" class="btn btn-danger">.</button>
+            </div>
         
-        </br> </br>
+        </br> </br> <br> <br>
      
         <input name="Submit" type="submit" value="Submit" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  
       <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
