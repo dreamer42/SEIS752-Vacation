@@ -38,6 +38,11 @@
                 document.getElementById("afternoonActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].afternoon_status];
                 document.getElementById("eveningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].evening_status];
                 document.getElementById("lodging").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].lodging_status];
+                
+                document.getElementById("morning_status").value =  dataReturned.vcationPlan[0].morning_status;
+                document.getElementById("afternoon_status").value =  dataReturned.vcationPlan[0].afternoon_status;
+                document.getElementById("evening_status").value =  dataReturned.vcationPlan[0].evening_status;
+                document.getElementById("lodging_status").value =  dataReturned.vcationPlan[0].lodging_status;
             });
     }
 
@@ -66,10 +71,10 @@
                 afternoonActivity: document.getElementById("afternoonActivity").value,
                 eveningActivity: document.getElementById("eveningActivity").value,
                 lodging: document.getElementById("lodging").value,
-                morningStatus: document.getElementById("morningActivity").style.backgroundColor
-                   // document.getElementById("afternoonActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].afternoon_status];
-                //document.getElementById("eveningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].evening_status];
-                //document.getElementById("lodging").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].lodging_status];
+                morningStatus: document.getElementById("morning_status").value,
+                afternoonStatus: document.getElementById("afternoon_status").value,
+                eveningStatus: document.getElementById("evening_status").value,
+                lodgingStatus: document.getElementById("lodging_status").value
             },
             dataType: 'html'
         })
@@ -82,9 +87,9 @@
     }
 </script>
 <script>
-    function setStatus(status, boxID) {
+    function setStatus(status, boxID, statusBoxID) {
 
-        var color; // = 'FFE16A';
+        var color; 
         
         switch (status)  // temporoary - really vant to get vals from database
         {
@@ -97,6 +102,7 @@
              break;
        }
        document.getElementById(boxID).style.backgroundColor = color;
+       document.getElementById(statusBoxID).value = status;
     }
 </script>
 
@@ -161,32 +167,35 @@
 
         morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;" > </textarea > 
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'morningActivity');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'morningActivity');">. </button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'morningActivity','morning_status');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity','morning_status');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'morningActivity','morning_status');">. </button>
             </div>
-        <br><br>
+        morningStatus: <input type="text"  id="morning_status" name="morning_status" value="testValue" style="color:blue" >
+        <br> <br>
         afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'afternoonActivity');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'afternoonActivity');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'afternoonActivity');">. </button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'afternoonActivity','afternoon_status');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'afternoonActivity','afternoon_status');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'afternoonActivity','afternoon_status');">. </button>
             </div>
+        afternoonStatus: <input type="text"  id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue" >
         <br><br>
         eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'eveningActivity');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'eveningActivity');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'eveningActivity');">. </button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'eveningActivity','evening_status');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'eveningActivity','evening_status');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'eveningActivity','evening_status');">. </button>
             </div>
+        eveningStatus: <input type="text"  id="evening_status" name="evening_status" value="testValue" style="color:blue" >
         <br><br>
         lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'lodging');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'lodging');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'lodging');">. </button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'lodging','lodging_status');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'lodging','lodging_status');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'lodging','lodging_status');">. </button>
             </div>
-        
+        lodgingStatus: <input type="text"  id="lodging_status" name="lodging_status" value="testValue" style="color:blue" >
         </br> </br> <br> <br>
      
         <input name="Submit" type="submit" value="Submit" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  
