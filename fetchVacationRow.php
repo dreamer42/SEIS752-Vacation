@@ -1,10 +1,28 @@
 <?php
 require("config.php");
 ini_set('display_errors', 'on'); error_reporting(-1);
-//echo '$_SESSION[currentVacationPlanId] =    '; echo $_SESSION['currentVacationPlanId']; echo '</br>';
+
 ?>
 <?php
  'echo "in fetchVacationRow")';
+     
+        $colorQuery = "
+            SELECT
+              status_id,
+              HEXcolor
+            FROM status_def
+        ";
+    try{
+        $colorStmt = $db->prepare($colorQuery);
+        $colorResult = $colorStmt->execute();
+    }
+    catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+    $colorArray = array();
+        while($colorRow = $colorStmt->fetch()){
+        $colorArray[(string)$colorRow['status_id']] = $colorRow['HEXcolor'];
+    }
+       // $colorArray[$row['morning_status']] 
+ 
    $query = "
             SELECT
                 vacation_plan_id,
@@ -29,8 +47,7 @@ ini_set('display_errors', 'on'); error_reporting(-1);
     $query_params = array(
         ':vacationPlanId' => $_SESSION['currentVacationPlanId']
     );
-//echo '$query = '; echo $query;  echo '</br></br>';
-//echo '$query_params = '; echo $query_params;  echo '</br></br>';
+
     try{
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
@@ -45,10 +62,13 @@ ini_set('display_errors', 'on'); error_reporting(-1);
        echo $row['day_date'];echo'  '; echo $row['travel_time'];echo'  ';echo $row['starting_location'];echo '</br>'; 
        echo $row['ending_location'];echo'  '; echo $row['morning'];echo'  ';echo $row['morning_status'];echo '</br>';  
        echo $row['afternoon'];echo'  '; echo $row['afternoon_status'];echo'  ';echo $row['evening'];echo '</br>';  
-       echo $row['evening_status'];echo'  '; echo $row['lodging'];echo'  ';echo $row['lodging_status'];echo '</br>';  
-*/
+       echo $row['evening_status'];echo'  '; echo $row['lodging'];echo'  ';echo $row['lodging_status'];echo '</br>'; 
+ */   
     }
-     echo json_encode($resultArray);  //we send the array as JSON object
+    $data = array();
+    $data['statusDef'] = $colorArray;
+    $data['vcationPlan'] = $resultArray;  
+     echo json_encode($data); // ($resultArray);  //we send the array as JSON object
        /*  http://stackoverflow.com/questions/22104811/return-json-object-from-mysql-query-using-json-encode
         *  $encode = array();
 

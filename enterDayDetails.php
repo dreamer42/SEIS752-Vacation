@@ -7,6 +7,7 @@
     }
     $currentVacationId = $_SESSION['currentVacationId'] ;
     $currentRowNum = $_SESSION['currentVacationPlanId'];
+
 ?>
 
 
@@ -20,16 +21,23 @@
             cache: false
         })
             .done(function (result) {
-//                alert("RESULTS: "+result);
+                //alert("RESULTS: "+result);
 
                 //decode the JSON object received
+                //  $data['statusDef'] = $colorArray;   $data['vcationPlan'] = $resultArray; 
                 var dataReturned = JSON.parse(result);
-                document.getElementById("startingLocation").value = dataReturned[0].starting_location;
-                document.getElementById("endingLocation").value = dataReturned[0].ending_location;
-                document.getElementById("morningActivity").value = dataReturned[0].morning;
-                document.getElementById("afternoonActivity").value = dataReturned[0].afternoon;
-                document.getElementById("eveningActivity").value =  dataReturned[0].evening;
-                document.getElementById("lodging").value = dataReturned[0].lodging;
+                document.getElementById("startingLocation").value = dataReturned.vcationPlan[0].starting_location;
+                document.getElementById("endingLocation").value = dataReturned.vcationPlan[0].ending_location;
+                document.getElementById("morningActivity").value = dataReturned.vcationPlan[0].morning;
+                document.getElementById("afternoonActivity").value = dataReturned.vcationPlan[0].afternoon;
+                document.getElementById("eveningActivity").value =  dataReturned.vcationPlan[0].evening;
+                document.getElementById("lodging").value = dataReturned.vcationPlan[0].lodging;
+                
+               // alert(dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status]); 
+                document.getElementById("morningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status];  //'blue'; 
+                document.getElementById("afternoonActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].afternoon_status];
+                document.getElementById("eveningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].evening_status];
+                document.getElementById("lodging").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].lodging_status];
             });
     }
 
@@ -125,33 +133,33 @@
      </p> <br><br>
    
    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
-        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text" />  <br><br>
-        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text" />  <br><br>
+        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" />  <br><br>
+        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" />  <br><br>
 
         <br>
 
-        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 > </textarea >
+        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;" > </textarea > 
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
               <button type="button" class="btn btn-success">. </button>
               <button type="button" class="btn btn-warning">. </button>
               <button type="button" class="btn btn-danger">. </button>
             </div>
         <br><br>
-        afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 > </textarea >
+        afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
               <button type="button" class="btn btn-success">.</button>
               <button type="button" class="btn btn-warning">.</button>
               <button type="button" class="btn btn-danger">.</button>
             </div>
         <br><br>
-        eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 > </textarea >
+        eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
               <button type="button" class="btn btn-success">.</button>
               <button type="button" class="btn btn-warning">.</button>
               <button type="button" class="btn btn-danger">.</button>
             </div>
         <br><br>
-        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 > </textarea >
+        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
               <button type="button" class="btn btn-success">.</button>
               <button type="button" class="btn btn-warning">.</button>
