@@ -65,7 +65,11 @@
                 morningActivity: document.getElementById("morningActivity").value,
                 afternoonActivity: document.getElementById("afternoonActivity").value,
                 eveningActivity: document.getElementById("eveningActivity").value,
-                lodging: document.getElementById("lodging").value
+                lodging: document.getElementById("lodging").value,
+                morningStatus: document.getElementById("morningActivity").style.backgroundColor
+                   // document.getElementById("afternoonActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].afternoon_status];
+                //document.getElementById("eveningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].evening_status];
+                //document.getElementById("lodging").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].lodging_status];
             },
             dataType: 'html'
         })
@@ -77,7 +81,24 @@
         });
     }
 </script>
+<script>
+    function setStatus(status, boxID) {
 
+        var color; // = 'FFE16A';
+        
+        switch (status)  // temporoary - really vant to get vals from database
+        {
+           case 1: color = 'FF3333';  break;
+           case 2: color = 'FFE16A'; break;
+           case 3: color = '70DB70'; break;
+           case 4: color = '9ae59a'; break;
+           default:
+             alert('Default case');
+             break;
+       }
+       document.getElementById(boxID).style.backgroundColor = color;
+    }
+</script>
 
 
 
@@ -140,30 +161,30 @@
 
         morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;" > </textarea > 
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success">. </button>
-              <button type="button" class="btn btn-warning">. </button>
-              <button type="button" class="btn btn-danger">. </button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'morningActivity');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'morningActivity');">. </button>
             </div>
         <br><br>
         afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success">.</button>
-              <button type="button" class="btn btn-warning">.</button>
-              <button type="button" class="btn btn-danger">.</button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'afternoonActivity');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'afternoonActivity');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'afternoonActivity');">. </button>
             </div>
         <br><br>
         eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success">.</button>
-              <button type="button" class="btn btn-warning">.</button>
-              <button type="button" class="btn btn-danger">.</button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'eveningActivity');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'eveningActivity');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'eveningActivity');">. </button>
             </div>
         <br><br>
         lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success">.</button>
-              <button type="button" class="btn btn-warning">.</button>
-              <button type="button" class="btn btn-danger">.</button>
+              <button type="button" class="btn btn-success" onclick= "setStatus(3,'lodging');">. </button>
+              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'lodging');">. </button>
+              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'lodging');">. </button>
             </div>
         
         </br> </br> <br> <br>

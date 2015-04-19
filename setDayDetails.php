@@ -10,7 +10,8 @@ require("config.php");
     $afternoonActivity = $_GET['afternoonActivity']; 
     $eveningActivity = $_GET['eveningActivity'];
     $lodging = $_GET['lodging']; 
-
+    $morningStatus = $_GET['morningStatus'];
+    
     $query = "
         UPDATE  `vacation_plan` 
         SET `starting_location` =  '".$startingLocation."',
@@ -18,7 +19,7 @@ require("config.php");
             `morning` =  '".$morningActivity."',
             `afternoon` =  '".$afternoonActivity."',
             `evening` =  '".$eveningActivity."',
-            `lodging` = '".$lodging."'  
+            `lodging` = '".$lodging."' 
         WHERE vacation_plan_id = '".$vacationPlanId."'"; 
 
     try{
