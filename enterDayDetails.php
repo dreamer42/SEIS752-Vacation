@@ -151,7 +151,8 @@
  <div class="container hero-unit" id="divX">  
     <body>
    </br> </br> </br> 
-   <h4> Use this form to enter/edit information for the selected day. (select day id is <?php echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?>)  </h4> 
+   <h4> Enter/edit information for the selected day. </h4>
+<!--       (select day id is --><?php //echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?><!--)  </h4> -->
      <p>
          <button type="button" class="btn btn-success"> </button> activity/lodging reservation not needed <br>
         <button type="button" class="btn btn-success"> </button> activity/lodging reservation confirmed <br>
@@ -171,7 +172,7 @@
               <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity','morning_status');">. </button>
               <button type="button" class="btn btn-danger" onclick= "setStatus(1,'morningActivity','morning_status');">. </button>
             </div>
-        morningStatus: <input type="text"  id="morning_status" name="morning_status" value="testValue" style="color:blue" >
+        <input type="hidden"  id="morning_status" name="morning_status" value="testValue" style="color:blue" >
         <br> <br>
         afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -179,7 +180,7 @@
               <button type="button" class="btn btn-warning" onclick= "setStatus(2,'afternoonActivity','afternoon_status');">. </button>
               <button type="button" class="btn btn-danger" onclick= "setStatus(1,'afternoonActivity','afternoon_status');">. </button>
             </div>
-        afternoonStatus: <input type="text"  id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue" >
+        <input type="hidden"  id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue" >
         <br><br>
         eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -187,7 +188,7 @@
               <button type="button" class="btn btn-warning" onclick= "setStatus(2,'eveningActivity','evening_status');">. </button>
               <button type="button" class="btn btn-danger" onclick= "setStatus(1,'eveningActivity','evening_status');">. </button>
             </div>
-        eveningStatus: <input type="text"  id="evening_status" name="evening_status" value="testValue" style="color:blue" >
+        <input type="hidden"  id="evening_status" name="evening_status" value="testValue" style="color:blue" >
         <br><br>
         lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -195,17 +196,17 @@
               <button type="button" class="btn btn-warning" onclick= "setStatus(2,'lodging','lodging_status');">. </button>
               <button type="button" class="btn btn-danger" onclick= "setStatus(1,'lodging','lodging_status');">. </button>
             </div>
-        lodgingStatus: <input type="text"  id="lodging_status" name="lodging_status" value="testValue" style="color:blue" >
+        <input type="hidden"  id="lodging_status" name="lodging_status" value="testValue" style="color:blue" >
         </br> </br> <br> <br>
      
         <input name="Submit" type="submit" value="Submit" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  
       <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
      </form>
    
-      <form action="fetchVacationRow.php" method="POST">
-           rowID: <input id="fetchRow"  name="fetchRow"  type="text" value="FetchRow"  />  <br><br>
-         <input type="submit" value="Submit"/> 
-      </form>      
+<!--      <form action="fetchVacationRow.php" method="POST">-->
+<!--           rowID: <input id="fetchRow"  name="fetchRow"  type="text" value="FetchRow"  />  <br><br>-->
+<!--         <input type="submit" value="Submit"/> -->
+<!--      </form>      -->
 
     </body>
  </div>
