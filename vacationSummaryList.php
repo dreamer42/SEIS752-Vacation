@@ -42,8 +42,8 @@ require("config.php");
                 lodging,
                 lodging_status
             FROM vacation_plan
-            WHERE
-                vacation_id = :vacation_id
+            WHERE vacation_id = :vacation_id
+            ORDER BY row_number
         ";
     $query_params = array(
         ':vacation_id' => $_SESSION['currentVacationId']
@@ -71,6 +71,7 @@ require("config.php");
         echo '<td><button type="button" onClick="redirectToEnterDayDetails(\'' . $row['vacation_plan_id'] . '\')">Details</button></td>';
         echo '</tr>';
     }
+    echo '<tr><td><input name="Add Day" type="submit" value="add" onclick="addNewDay();"/></td></tr>';
     echo '</tbody>';
     echo '</table>';
 

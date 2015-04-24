@@ -5,6 +5,9 @@
         header("Location: index.php");
         die("Redirecting to index.php");
     }
+
+    $currentVacationId = $_SESSION['currentVacationId'] ;
+
 ?>
 
 <script>
@@ -31,6 +34,43 @@
             .done(function (html) {
                 window.location.href = "enterDayDetails.php"
             });
+    }
+
+    function addNewDay() {
+        $.ajax({
+            url: "getCurrentVacationId.php",    // TODO: new php, vacationSummaryList is just here temp
+            cache: false,
+            async: false
+        })
+            .done(function ($currentVacationId) {
+                $.ajax({
+                    url: "getNextVacationPlanInfo.php",    // TODO: new php, vacationSummaryList is just here temp
+                    cache: false,
+                    async: false,
+                    data: { vacationId: $currentVacationId }
+                })
+                    .done(function (result) {
+                        var dataReturned = JSON.parse(result);
+
+                        $.ajax({
+                            url: "insertVacationPlan.php",
+                            cache: false,
+                            async: false,
+                            data: { vacationId: $currentVacationId, rowNumber: dataReturned.NEXT_ROW_NUMBER, dayDate:dataReturned.NEXT_DAY_DATE, startingLocation: dataReturned.NEXT_STARTING_LOCATION  }
+                        })
+                            .done(function ($vacationPlanId) {
+                                redirectToEnterDayDetails($vacationPlanId);
+                            });
+                    });
+                });
+    }
+
+    function goToMap() {
+        window.location.href = "displayMap.php"
+    }
+
+    function goToAnalysis() {
+        window.location.href = "displayAnalysis.php"
     }
 
 </script>
@@ -74,10 +114,14 @@
 
 <div class="container hero-unit">
     <h2>New cool features on summary coming soon.  For now click details to look at those days.</h2>
+
+    <h3>TODO: make these buttons "cooler" and make the pages they go to functional.</h3>
+
+    <input name="Map" type="submit" value="Map" onclick="goToMap();"/>
+    <input name="Vacation Analyzer" type="submit" value="Analysis" onclick="goToAnalysis();"/>
 </div>
 
 <div id="TheListOfDays" class="container hero-unit"></div>
-
 
 </body>
 </html>

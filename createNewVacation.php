@@ -34,7 +34,7 @@
                         url: "insertVacationPlan.php",
                         cache: false,
                         async: false,
-                        data: { vacationId: vacationId, rowNumber: 1 }
+                        data: { vacationId: vacationId, rowNumber: 1, dayDate: startDate.value, startingLocation: "" }
                     })
                     .done(function (vacationPlanId) {
                         $.ajax({
@@ -50,6 +50,7 @@
                 })
             });
     }
+
 
 </script>
 
@@ -67,6 +68,8 @@
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
     </style>
+
+
 </head>
 
 <body>
@@ -82,7 +85,6 @@
       <a href="welcome.php" class="brand">Vacation</a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
-          <!--<li><a href="register.php">Register</a></li>-->
           <li class="divider-vertical"></li>
           <li><a href="logout.php">Log Out</a></li>
         </ul>
@@ -96,6 +98,10 @@
     <form id="newVacation" name="newVacation" method="get" >
         <label>Vacation Name:
             <input type="text" name="vacationName" id="vacationName" value="" />
+        </label>
+        <label>Start Date (yyyy-mm-dd) (TODO: make a date picker instead of plain input):
+            <input type="text" name="startDate" id="startDate" value="" />
+<!--            <input type="text" id="datepicker">-->
         </label>
         <label>
             <button type="button" onclick="createNewVacation()">Create Vacation</button>

@@ -126,7 +126,7 @@
     
 </head>
 
-<body>
+<!--<body>-->
 
 <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
@@ -199,7 +199,7 @@
         <input type="hidden"  id="lodging_status" name="lodging_status" value="testValue" style="color:blue" >
         </br> </br> <br> <br>
      
-        <input name="Submit" type="submit" value="Submit" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  
+        <input name="Save" type="submit" value="Save" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>
       <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
      </form>
    
