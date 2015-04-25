@@ -43,6 +43,10 @@
                 document.getElementById("afternoon_status").value =  dataReturned.vcationPlan[0].afternoon_status;
                 document.getElementById("evening_status").value =  dataReturned.vcationPlan[0].evening_status;
                 document.getElementById("lodging_status").value =  dataReturned.vcationPlan[0].lodging_status;
+                
+                document.getElementById("vacDay").value = dataReturned.vcationPlan[0].row_number;  
+                document.getElementById("vacation").value = dataReturned['vacationName']['vacation_id'];
+                
             });
     }
 
@@ -151,15 +155,17 @@
  <div class="container hero-unit" id="divX">  
     <body>
    </br> </br> </br> 
-   <h4> Enter/edit information for the selected day. </h4>
+   <h4> status color codes: </h4>
 <!--       (select day id is --><?php //echo htmlentities($_SESSION['currentVacationPlanId'], ENT_QUOTES, 'UTF-8'); ?><!--)  </h4> -->
      <p>
-         <button type="button" class="btn btn-success"> </button> activity/lodging reservation not needed <br>
         <button type="button" class="btn btn-success"> </button> activity/lodging reservation confirmed <br>
         <button type="button" class="btn btn-warning"> </button> activity/lodging reservation needs confirmation <br>
         <button type="button" class="btn btn-danger"> </button> activity/lodging reservation not made <br>
      </p> <br><br>
-   
+     <h4> Enter/edit information for 
+     Day: <textarea readonly maxlength="3" id="vacDay" name="vacDay" rows="1" cols="6" style="font-weight: bold" > </textarea > 
+     of Vacation:  <textarea readonly  id="vacation" name="vacation" rows="1" cols="24" style="font-weight: bold" > </textarea >  </h4> <br>
+     
    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
         startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" />  <br><br>
         endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" />  <br><br>

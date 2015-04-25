@@ -4,7 +4,7 @@ ini_set('display_errors', 'on'); error_reporting(-1);
 
 ?>
 <?php
- 'echo "in fetchVacationRow")';
+ // 'echo "in fetchVacationRow")';
      
         $colorQuery = "
             SELECT
@@ -65,9 +65,24 @@ ini_set('display_errors', 'on'); error_reporting(-1);
        echo $row['evening_status'];echo'  '; echo $row['lodging'];echo'  ';echo $row['lodging_status'];echo '</br>'; 
  */   
     }
+    $nameQuery = "SELECT name 
+                   FROM `vacations` 
+                   WHERE vacation_id = 2
+                 ";
+    try{
+        $nameStmt = $db->prepare($nameQuery);
+        $nameResult = $nameStmt->execute();
+    }
+    catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+    $nameArray = array();
+        while($nameRow = $nameStmt->fetch()){
+        $nameArray["vacation_id"] = $nameRow['name'];
+    }
+    
     $data = array();
     $data['statusDef'] = $colorArray;
-    $data['vcationPlan'] = $resultArray;  
+    $data['vcationPlan'] = $resultArray;
+    $data['vacationName'] = $nameArray;
      echo json_encode($data); // ($resultArray);  //we send the array as JSON object
        /*  http://stackoverflow.com/questions/22104811/return-json-object-from-mysql-query-using-json-encode
         *  $encode = array();
@@ -78,6 +93,5 @@ ini_set('display_errors', 'on'); error_reporting(-1);
 
             echo json_encode($encode);
         */
-
     
     ?>
