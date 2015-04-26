@@ -36,6 +36,21 @@
             });
     }
 
+    function deleteDay($vacationPlanId) {
+        var result = confirm("Are you sure you want to delete this day?");
+        if (result) {
+            $.ajax({
+                url: "deleteVacationPlan.php",
+                cache: false,
+                async: false,
+                data: { vacationPlanId: $vacationPlanId }
+            })
+                .done(function () {
+                    window.location.href = "vacationSummary.php"
+                });
+        }
+    }
+
     function addNewDay() {
         $.ajax({
             url: "getCurrentVacationId.php",    // TODO: new php, vacationSummaryList is just here temp

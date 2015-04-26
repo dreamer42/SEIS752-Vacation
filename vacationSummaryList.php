@@ -55,10 +55,11 @@ require("config.php");
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
     echo '<table class="table table-bordered table-hover">';
-    echo '<thead><tr><td>Day</td><td>Date</td><td>Travel Time</td><td>Start</td><td>End</td><td>Morning</td><td>Afternoon</td><td>Evening</td><td>Lodging</td></tr></thead>';
+    echo '<thead><tr><td></td><td>Day</td><td>Date</td><td>Travel Time</td><td>Start</td><td>End</td><td>Morning</td><td>Afternoon</td><td>Evening</td><td>Lodging</td></tr></thead>';
     echo '<tbody>';
     while($row = $stmt->fetch()){
         echo '<tr>';
+        echo '<td><button class="btn btn-danger btn-small" onClick="deleteDay(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-trash"></i></button></td>';
         echo '<td>'.$row['row_number'].'</td>';
         echo '<td>'.$row['day_date'].'</td>';
         echo '<td>'.$row['travel_time'].'</td>';
@@ -68,10 +69,10 @@ require("config.php");
         echo '<td bgcolor=\''.$colorArray[$row['afternoon_status']].'\'">'.$row['afternoon'].'</td>';
         echo '<td bgcolor=\''.$colorArray[$row['evening_status']].'\'">'.$row['evening'].'</td>';
         echo '<td bgcolor=\''.$colorArray[$row['lodging_status']].'\'">'.$row['lodging'].'</td>';
-        echo '<td><button type="button" onClick="redirectToEnterDayDetails(\'' . $row['vacation_plan_id'] . '\')">Details</button></td>';
+        echo '<td><button class="btn btn-primary btn-small" onClick="redirectToEnterDayDetails(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-zoom-in"></i></button></td>';
         echo '</tr>';
     }
-    echo '<tr><td><input name="Add Day" type="submit" value="add" onclick="addNewDay();"/></td></tr>';
+    echo '<tr><td colspan="10"></td><td><button class="btn btn-primary btn-small" onClick="addNewDay(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-plus"></i></button></td></tr>';
     echo '</tbody>';
     echo '</table>';
 

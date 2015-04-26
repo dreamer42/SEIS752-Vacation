@@ -30,7 +30,6 @@ try{
 }
 catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 $row = $stmt->fetch();
-//echo $row['NEXT_ROW_NUMBER'];
 
 $data = array();
 $data['NEXT_ROW_NUMBER'] = $row['NEXT_ROW_NUMBER'];
