@@ -67,11 +67,14 @@ ini_set('display_errors', 'on'); error_reporting(-1);
     }
     $nameQuery = "SELECT name 
                    FROM `vacations` 
-                   WHERE vacation_id = 2
+                   WHERE vacation_id = :vacationId
                  ";
+    $query_param = array(
+                    ':vacationId' => $_SESSION['currentVacationId'] 
+                    );
     try{
         $nameStmt = $db->prepare($nameQuery);
-        $nameResult = $nameStmt->execute();
+        $nameResult = $nameStmt->execute($query_param);
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
     $nameArray = array();
