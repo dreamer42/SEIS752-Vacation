@@ -77,6 +77,7 @@
             async: false,
             data: { vacationPlanId: $vacationPlanId,
                 dayDate: document.getElementById("dayDate").value;
+                travelTime: document.getElementById("travelTime").value;
                 startingLocation: document.getElementById("startingLocation").value,
                 endingLocation:  document.getElementById("endingLocation").value,
                 morningActivity: document.getElementById("morningActivity").value,
@@ -117,7 +118,6 @@
        document.getElementById(statusBoxID).value = status;
     }
 </script>
-
 
 
 <!doctype html>
@@ -180,6 +180,10 @@
         date: <input id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
         endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .        . 
         travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>
+
+
+</button>
         <br><br>
 
         <br>
@@ -229,4 +233,32 @@
 
     </body>
  </div>
+<!-- Modal -->
+<div class="modal fade" id="modalComputeDistance" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               This Modal title
+            </h4>
+         </div>
+         <div class="modal-body">
+            Add some text here
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+            <button type="button" class="btn btn-primary">
+               Submit changes
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </html>
