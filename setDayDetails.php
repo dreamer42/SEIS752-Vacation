@@ -4,6 +4,8 @@ require("config.php");
 
   <?php
     $vacationPlanId = $_SESSION['currentVacationPlanId'];
+    $dayDate = $_GET['dayDate'];
+    $travelTime = $_GET['travelTime'];
     $startingLocation = $_GET['startingLocation'];
     $endingLocation = $_GET['endingLocation'];
     $morningActivity = $_GET['morningActivity'];
@@ -32,8 +34,10 @@ require("config.php");
     }
 
     $query = "
-        UPDATE  `vacation_plan` 
-        SET `starting_location` =  '".$startingLocation."',
+        UPDATE  `vacation_plan`  
+        SET `day_date` =  '".$dayDate."',
+            `travel_time` =  '".$travelTime."',
+            `starting_location` =  '".$startingLocation."',
             `ending_location` =  '".$endingLocation."',
             `morning` =  '".$morningActivity."',
             `morning_status` =  '".$morningStatus."',    
