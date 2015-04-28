@@ -50,6 +50,8 @@
     }
 ?>
 
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,6 +60,8 @@
     <meta name="description" content="Vacation">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
@@ -65,6 +69,7 @@
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
     </style>
+
 </head>
 
 <body>
