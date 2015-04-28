@@ -118,7 +118,26 @@
        document.getElementById(statusBoxID).value = status;
     }
 </script>
+<script>
+function mapIt()  {
+    alert("in mapIt");
+           $.ajax({
+            type: "GET",
+            url: "mapIt.php",
+            cache: false,
+            async: false,
+            data: {
+                 startingLocation: document.getElementById("startingLocation").value,
+                 endingLocation:   document.getElementById("endingLocation").value,
+            },
+            dataType: 'html'
+        })
+        .done(function (html) {
+                window.location.href = "enterDayDetails.php";
+        });
 
+}
+</script>
 
 <!doctype html>
 <!-- <html lang="en">   -->
@@ -180,8 +199,8 @@
         date: <input id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
         endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .        . 
         travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>
-
+         <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button> -->
+         <button type="button" class="btn btn-primary btn-lg" onclick= "mapIt();" >Compute travel Distance </button>
 
 </button>
         <br><br>
@@ -249,6 +268,17 @@
          </div>
          <div class="modal-body">
             Add some text here
+            	<form id="modalForm" name="modalForm">
+                    <label>Origin:
+                      <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value="" />
+                    </label>
+                    <label>Destination:
+                      <input type="text" name="destination" id="destination" required="required" placeholder="ending place"  value="" />
+                    </label>
+                    <label>
+                      <button type="button" onclick="calculateDistances();">Calculate</button>
+                    </label>
+                </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-default" 
