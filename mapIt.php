@@ -1,12 +1,4 @@
-<?php
-require("config.php");
-ini_set('display_errors', 'on'); error_reporting(-1);
 
-    $startingLocation = $_GET['startingLocation'];
-    $endingLocation = $_GET['endingLocation'];
-    echo '$startingLocation' ; echo '$endingLocation'; echo '</br>';
-?>
-<!--  Mike's Example -->
 <!-- Basic for code from https://developers.google.com -->
 
 <script type="text/javascript"
@@ -20,6 +12,7 @@ var directionsService = new google.maps.DirectionsService();
 var map;
 
 function initialize() {
+    alert("initialize");
         if(directionsDisplay){
             directionsDisplay.setMap(null);
         }
@@ -33,11 +26,9 @@ function initialize() {
 }
 
 function calcRoute() {
-
-  //var start = document.getElementById("origin").value;
-  //var end = document.getElementById("destination").value;
-  var start = <?php$ $startingLocation? >;
-  var end = <?php$ $endingLocationingLocation? >;
+  alert("calcRoute");
+  var start = document.getElementById("origin").value;
+  var end = document.getElementById("destination").value;
   var request = {
     origin:start,
     destination:end,
@@ -52,13 +43,14 @@ function calcRoute() {
 }
 
 function loadTravelResults()
-{
+{   alert("loadTravelReults");
 	initialize();
 	calcRoute();
 	calculateDistances();
 }
 
 function calculateDistances() {
+    alert("calculateDistances");
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
@@ -70,6 +62,7 @@ function calculateDistances() {
 }
 
 function callback(response, status) {
+     alert("callback");
   if (status != google.maps.DistanceMatrixStatus.OK) {
     alert('Error was: ' + status);
   } else {
@@ -126,3 +119,4 @@ function callback(response, status) {
 	<div id="directionsPanel" style="float:right;width:30%;height:80%"></div>
 </body>
 </html>
+

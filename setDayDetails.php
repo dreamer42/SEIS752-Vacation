@@ -35,11 +35,11 @@ require("config.php");
 
     $query = "
         UPDATE  `vacation_plan`  
-        SET `day_date` =  '".$dayDate."',
+        SET `day_date` =  :dayDate,
             `travel_time` =  '".$travelTime."',
             `starting_location` =  '".$startingLocation."',
             `ending_location` =  '".$endingLocation."',
-            `morning` =  '".$morningActivity."',
+            `morning` =  :morningActivity,
             `morning_status` =  '".$morningStatus."',    
             `afternoon` =  '".$afternoonActivity."',
             `afternoon_status` =  '".$afternoonStatus."',
@@ -49,10 +49,18 @@ require("config.php");
             `lodging_status` =  '".$lodgingStatus."'
         WHERE vacation_plan_id = '".$vacationPlanId."'"; 
     //echo $query;
-    try{
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute(); 
-    }
+    //TODO: finish changing over parameters
+    $query_params = array(
+        ':dayDate' => $dayDate,   
+        ':morningActivity' => $morningActivity
+
+    );
+
+try{
+    $stmt = $db->prepare($query);
+    $result = $stmt->execute($query_params);
+}
+
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
     header( "Location: http://localhost/vacation/vacationSummary.php");
   
