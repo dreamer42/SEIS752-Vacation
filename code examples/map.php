@@ -1,3 +1,13 @@
+<?php
+require("config.php");
+?>
+
+  <?php
+    $start = $_GET['startingLocation'];
+    $end = $_GET['endingLocation'];
+    echo $start;  echo $end; echo '</br> ';
+    ?>
+
 <!-- Basis for code from https://developers.google.com -->
 
 <script type="text/javascript"
@@ -25,8 +35,8 @@ function initialize() {
 
 function calcRoute() {
 
-  var start = document.getElementById("origin").value;
-  var end = document.getElementById("destination").value;
+  var start = $start ; // document.getElementById("origin").value;
+  var end = $end; // document.getElementById("destination").value;
   var request = {
     origin:start,
     destination:end,

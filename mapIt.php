@@ -1,4 +1,3 @@
-
 <!-- Basic for code from https://developers.google.com -->
 
 <script type="text/javascript"

@@ -123,10 +123,10 @@
 </script>
 <script>
 function mapIt()  {
-    alert("in mapIt");
+    alert("in map"+document.getElementById("startingLocation").value);
            $.ajax({
             type: "GET",
-            url: "mapIt.php",
+            url: "map.php",
             cache: false,
             async: false,
             data: {
@@ -136,7 +136,7 @@ function mapIt()  {
             dataType: 'html'
         })
         .done(function (html) {
-            alert("back from mapIt");
+            alert("back from map");
             //    window.location.href = "enterDayDetails.php";
         });
 }
@@ -186,7 +186,7 @@ function mapIt()  {
  <div class="container hero-unit" id="divX">  
      <body>
 
-  <!-- (select day id is // <?php echo htmlentities($_SESSION['currentVacationDay'], ENT_QUOTES, 'UTF-8'); ?>  -->
+  <!--  (select day id is // <?php echo htmlentities($_SESSION['currentVacationDay'], ENT_QUOTES, 'UTF-8'); ?>   -->
    </br> </br> </br> 
    <h4> status color codes: </h4>
      <p>
@@ -199,13 +199,14 @@ function mapIt()  {
      of Vacation:  <textarea readonly  id="vacation" name="vacation" rows="1" cols="24" style="font-weight: bold" > </textarea >  </h3> <br>
         
    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET"> 
-        date: <input id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
+        date: <input readonly id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
         startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .    .      
         endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
         travelDistance:<input id="travelDistance"  name="travelDistance" size="15" type="text"  style="background-color:#FCF5D8;" /> .       .
         travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>  -->
-          <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Compute travel Distance </button> 
+        <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Compute travel Distance </button>        
+        <!--     <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();" >  Compute travel Distance </button>  -->
 
 </button>
         <br><br>
