@@ -42,14 +42,13 @@ CREATE TABLE IF NOT EXISTS `status_def` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `status_def`
---
+-- Dumping data for table `status_def`  
+-- 'red', 'FF3333'  lighter red = #FE2E2E
 
 INSERT INTO `status_def` (`status_id`, `color`, `HEXcolor`, `description`) VALUES
-(1, 'red', 'FF3333', 'activity/lodging reservation not made'),
+(1, 'red', 'FE2E2E', 'activity/lodging reservation not made'),
 (2, 'yellow', 'FFE16A', 'activity/lodging reservation needs confirmed'),
-(3, 'green', '70DB70', 'activity/lodging reservation is confirmed'),
-(4, 'light green', '9ae59a', 'activity/lodging reservation is not needed');
+(3, 'green', '70DB70', 'activity/lodging reservation is confirmed/not needed');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

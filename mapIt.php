@@ -12,7 +12,6 @@ var directionsService = new google.maps.DirectionsService();
 var map;
 
 function initialize() {
-    alert("initialize");
         if(directionsDisplay){
             directionsDisplay.setMap(null);
         }
@@ -26,7 +25,6 @@ function initialize() {
 }
 
 function calcRoute() {
-  alert("calcRoute");
   var start = document.getElementById("origin").value;
   var end = document.getElementById("destination").value;
   var request = {
@@ -43,14 +41,13 @@ function calcRoute() {
 }
 
 function loadTravelResults()
-{   alert("loadTravelReults");
+{  
 	initialize();
 	calcRoute();
 	calculateDistances();
 }
 
 function calculateDistances() {
-    alert("calculateDistances");
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
@@ -62,7 +59,6 @@ function calculateDistances() {
 }
 
 function callback(response, status) {
-     alert("callback");
   if (status != google.maps.DistanceMatrixStatus.OK) {
     alert('Error was: ' + status);
   } else {
@@ -73,12 +69,18 @@ function callback(response, status) {
 
     for (var i = 0; i < origins.length; i++) {
       var results = response.rows[i].elements;
+      var distanceNum = 0;
+      var durationNum = 0;
       if(results[0].status == 'OK'){
 		  for (var j = 0; j < results.length; j++) {
 			distanceResult.innerHTML += 'Traveling from ' +origins[i] + ' to ' + destinations[j] + '<br>'
 				+ 'Distance covered:' + results[j].distance.text + '<br>'
 				+ 'Travel time:     ' + results[j].duration.text + '<br>';
+                        distanceNum = results[j].distance.value/1609.34;
+                        durationNum = results[j].duration.value/(60*60);
+                        alert( distanceNum +"  "+durationNum);
 		  }
+                  // distance.value is in meters,  duration.va;ue is in seconds
       } else {
       	distanceResult.innerHTML += 'unable to calculate, be sure to have a valid origin and destination';
       }
