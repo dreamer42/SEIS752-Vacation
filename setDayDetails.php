@@ -6,6 +6,7 @@ require("config.php");
     $vacationPlanId = $_SESSION['currentVacationPlanId'];
     $dayDate = $_GET['dayDate'];
     $travelTime = $_GET['travelTime'];
+    $travelDistance = $_GET['travelDistance'];
     $startingLocation = $_GET['startingLocation'];
     $endingLocation = $_GET['endingLocation'];
     $morningActivity = $_GET['morningActivity'];
@@ -36,25 +37,35 @@ require("config.php");
     $query = "
         UPDATE  `vacation_plan`  
         SET `day_date` =  :dayDate,
-            `travel_time` =  '".$travelTime."',
-            `travel_distance` =  '".$travelDistance."',
-            `starting_location` =  '".$startingLocation."',
-            `ending_location` =  '".$endingLocation."',
+            `travel_time` =  :travelTime,
+            `travel_distance` =  :travelDistance,
+            `starting_location` =  :startingLocation,
+            `ending_location` =  :endingLocation,
             `morning` =  :morningActivity,
-            `morning_status` =  '".$morningStatus."',    
-            `afternoon` =  '".$afternoonActivity."',
-            `afternoon_status` =  '".$afternoonStatus."',
-            `evening` =  '".$eveningActivity."',
-            `evening_status` =  '".$eveningStatus."',  
-            `lodging` = '".$lodging."', 
-            `lodging_status` =  '".$lodgingStatus."'
-        WHERE vacation_plan_id = '".$vacationPlanId."'"; 
-    //echo $query;
-    //TODO: finish changing over parameters
-    $query_params = array(
-        ':dayDate' => $dayDate,   
-        ':morningActivity' => $morningActivity
+            `morning_status` =  :morningStatus,    
+            `afternoon` =  :afternoonActivity,
+            `afternoon_status` =  :afternoonStatus,
+            `evening` =  :eveningActivity,
+            `evening_status` =  :eveningStatus,  
+            `lodging` = :lodging, 
+            `lodging_status` =  :lodgingStatus
+        WHERE vacation_plan_id = :vacationPlanId; ";
 
+    $query_params = array(
+        ':dayDate' => $dayDate,
+        ':travelTime' => $travelTime,
+        ':travelDistance' => $travelDistance,
+        ':startingLocation' => $startingLocation,
+        ':morningActivity' => $morningActivity,
+        ':endingLocation' => $endingLocation,
+        ':morningStatus' => $morningStatus,
+        ':afternoonActivity' => $afternoonActivity,
+        ':afternoonStatus' => $afternoonStatus,
+        ':eveningActivity' =>  $eveningActivity,
+        ':eveningStatus' => $eveningStatus ,
+        ':lodging' => $lodging,
+        ':lodgingStatus' => $lodgingStatus,
+        ':vacationPlanId' => $vacationPlanId 
     );
 
 try{
