@@ -28,6 +28,8 @@
                 var dataReturned = JSON.parse(result);
                 document.getElementById("dayDate").value = dataReturned.vcationPlan[0].day_date;
                 document.getElementById("startingLocation").value = dataReturned.vcationPlan[0].starting_location;
+                document.getElementById("travelTime").value = dataReturned.vcationPlan[0].travel_time;
+                document.getElementById("travelDistance").value = dataReturned.vcationPlan[0].travel_distance;
                 document.getElementById("endingLocation").value = dataReturned.vcationPlan[0].ending_location;
                 document.getElementById("morningActivity").value = dataReturned.vcationPlan[0].morning;
                 document.getElementById("afternoonActivity").value = dataReturned.vcationPlan[0].afternoon;
@@ -51,7 +53,7 @@
             });
     }
     function undoEdits($vacationPlanId) {
-        var result = confirm("Are you sure you want to undo all your edits?");
+        var result = confirm("Are you sure you want to undo all your edits? Undo will reset the fields to what they were.");
         if (result) {
             loadEnterDayDetails();
         }
@@ -78,6 +80,7 @@
             data: { vacationPlanId: $vacationPlanId,
                 dayDate: document.getElementById("dayDate").value;
                 travelTime: document.getElementById("travelTime").value;
+                travelDistance: document.getElementById("travelDistance").value;
                 startingLocation: document.getElementById("startingLocation").value,
                 endingLocation:  document.getElementById("endingLocation").value,
                 morningActivity: document.getElementById("morningActivity").value,
@@ -133,10 +136,11 @@ function mapIt()  {
             dataType: 'html'
         })
         .done(function (html) {
-                window.location.href = "enterDayDetails.php";
+            alert("back from mapIt");
+            //    window.location.href = "enterDayDetails.php";
         });
-
 }
+
 </script>
 
 <!doctype html>
@@ -194,20 +198,21 @@ function mapIt()  {
      Day: <textarea readonly maxlength="3" id="vacDay" name="vacDay" rows="1" cols="6" style="font-weight: bold" > </textarea > 
      of Vacation:  <textarea readonly  id="vacation" name="vacation" rows="1" cols="24" style="font-weight: bold" > </textarea >  </h3> <br>
         
-   <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">   
-        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .    .
+   <form name="myForm" id="myForm" action="setDayDetails.php" method="GET"> 
         date: <input id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
-        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .        . 
+        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .    .      
+        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
+        travelDistance:<input id="travelDistance"  name="travelDistance" size="15" type="text"  style="background-color:#FCF5D8;" /> .       .
         travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
-         <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button> -->
-         <button type="button" class="btn btn-primary btn-lg" onclick= "mapIt();" >Compute travel Distance </button>
+        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>  -->
+          <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Compute travel Distance </button> 
 
 </button>
         <br><br>
 
         <br>
 
-        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;" > </textarea > 
+        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=4 COLS=60 style="background-color:#FCF5D8;" > </textarea > 
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
               <button type="button" class="btn btn-success" onclick= "setStatus(3,'morningActivity','morning_status');">. </button>
               <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity','morning_status');">. </button>
@@ -266,11 +271,12 @@ function mapIt()  {
                This Modal title
             </h4>
          </div>
+          
          <div class="modal-body">
             Add some text here
             	<form id="modalForm" name="modalForm">
                     <label>Origin:
-                      <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value="" />
+                      <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value= startingLocation.value; ?>" />
                     </label>
                     <label>Destination:
                       <input type="text" name="destination" id="destination" required="required" placeholder="ending place"  value="" />

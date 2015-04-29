@@ -30,6 +30,7 @@ ini_set('display_errors', 'on'); error_reporting(-1);
                 row_number,
                 day_date,
                 travel_time,
+                travel_distance,
                 starting_location,
                 ending_location,
                 morning,

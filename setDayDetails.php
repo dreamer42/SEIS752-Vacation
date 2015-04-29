@@ -37,6 +37,7 @@ require("config.php");
         UPDATE  `vacation_plan`  
         SET `day_date` =  :dayDate,
             `travel_time` =  '".$travelTime."',
+            `travel_distance` =  '".$travelDistance."',
             `starting_location` =  '".$startingLocation."',
             `ending_location` =  '".$endingLocation."',
             `morning` =  :morningActivity,
