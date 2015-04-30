@@ -78,9 +78,9 @@
             cache: false,
             async: false,
             data: { vacationPlanId: $vacationPlanId,
-                dayDate: document.getElementById("dayDate").value;
-                travelTime: document.getElementById("travelTime").value;
-                travelDistance: document.getElementById("travelDistance").value;
+                dayDate: document.getElementById("dayDate").value,
+                travelTime: document.getElementById("travelTime").value,
+                travelDistance: document.getElementById("travelDistance").value,
                 startingLocation: document.getElementById("startingLocation").value,
                 endingLocation:  document.getElementById("endingLocation").value,
                 morningActivity: document.getElementById("morningActivity").value,
@@ -94,12 +94,12 @@
             },
             dataType: 'html'
         })
-            .done(function (html) {
+        .done(function (html) {
                 window.location.href = "vacationSummary.php";
-            });
-    .fail(jqXHR, textStatus, errorThrown) {
-            alert("failed");
-        });
+            })
+    .fail(jqXHR, textStatus, errorThrown);// {
+ //           alert("failed");
+ //       });
     }
 </script>
 <script>
@@ -123,10 +123,10 @@
 </script>
 <script>
 function mapIt()  {
-    alert("in map"+document.getElementById("startingLocation").value);
+    alert("in mapIt function   "+document.getElementById("startingLocation").value);
            $.ajax({
             type: "GET",
-            url: "map.php",
+            url: "mapIt.php",
             cache: false,
             async: false,
             data: {
@@ -137,10 +137,19 @@ function mapIt()  {
         })
         .done(function (html) {
             alert("back from map");
-            //    window.location.href = "enterDayDetails.php";
+           // window.location.href = "enterDayDetails.php";
         });
-}
 
+}
+</script>
+<script>
+function mapIt2()  {
+    alert("in mapIt2 function");
+   var start = document.getElementById("startingLocation").value;
+   var end = document.getElementById("endingLocation").value;
+   var args = "startingLocation="+start+"&endingLocation="+end;
+   window.location.href = "mapIt.php?"+args;
+    }
 </script>
 
 <!doctype html>
@@ -151,7 +160,7 @@ function mapIt()  {
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+   <!-- <script src="script.js"></script>  -->
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
         body { background: url(images/bglight.png); }
@@ -205,8 +214,9 @@ function mapIt()  {
         travelDistance:<input id="travelDistance"  name="travelDistance" size="15" type="text"  style="background-color:#FCF5D8;" /> .       .
         travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>  -->
-        <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Compute travel Distance </button>        
-        <!--     <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();" >  Compute travel Distance </button>  -->
+          <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Working Compute travel Distance </button> 
+          <button type="button" class="btn btn-primary btn-lg" onclick="mapIt2();" >  mapIt2() </button> 
+          <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();" > Broken  Compute travel Distance </button> 
 
 </button>
         <br><br>

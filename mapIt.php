@@ -1,3 +1,9 @@
+<?php
+  require("config.php");
+  $startingLocation =   $_GET['startingLocation'];  // $_SESSION['startingLocation'] ;
+  $endingLocation =   $_GET['endingLocation'];  // $_SESSION['endingLocation'] ;
+  echo $endingLocation;
+?>
 <!-- Basic for code from https://developers.google.com -->
 
 <script type="text/javascript"
@@ -25,7 +31,7 @@ function initialize() {
 
 function calcRoute() {
   var start = document.getElementById("origin").value;
-  var end = document.getElementById("destination").value;
+  var end =  document.getElementById("destination").value;
   var request = {
     origin:start,
     destination:end,
@@ -101,10 +107,10 @@ function callback(response, status) {
     <h2>Goal: Get Info for Traveling between Two Places</h2>
 	<form id="mainForm" name="mainForm">
 	      <label>Origin:
-	        <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value="" />
+	        <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value="<?php $startingLocation ?>" />
 	      </label>
 	      <label>Destination:
-	        <input type="text" name="destination" id="destination" required="required" placeholder="ending place"  value="" />
+	        <input type="text" name="destination" id="destination" required="required" placeholder="ending place"  value="<?php $endingLocation ?>" />
 	      </label>
 	      <label>
 	        <button type="button" onclick="loadTravelResults()">Calculate</button>
