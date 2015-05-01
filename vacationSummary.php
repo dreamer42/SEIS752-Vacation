@@ -38,7 +38,12 @@
 
     function deleteDay($vacationPlanId) {
       //  var result = confirm("Are you sure you want to delete this day?");
-        var result = bootbox.confirm("Are you sure?"); 
+      var result;
+      bootbox.confirm("Are you sure?", function(result) {
+      alert("Confirm result: "+result);
+         }); 
+      
+        //var result = bootbox.confirm("Are you sure?"); 
 
 
         if (result) {
@@ -101,6 +106,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/bootbox.min.js"></script> 
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css">  <!-- CSS dependencies -->
     <style type="text/css">
