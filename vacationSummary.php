@@ -37,7 +37,10 @@
     }
 
     function deleteDay($vacationPlanId) {
-        var result = confirm("Are you sure you want to delete this day?");
+      //  var result = confirm("Are you sure you want to delete this day?");
+        var result = bootbox.confirm("Are you sure?"); 
+
+
         if (result) {
             $.ajax({
                 url: "deleteVacationPlan.php",
@@ -99,6 +102,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css">  <!-- CSS dependencies -->
     <style type="text/css">
         body { background: url(images/bglight.png); }
         .hero-unit { background-color: #fff; }
