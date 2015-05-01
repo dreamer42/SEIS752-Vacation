@@ -38,25 +38,23 @@
 
     function deleteDay($vacationPlanId) {
       //  var result = confirm("Are you sure you want to delete this day?");
-      var result;
-      bootbox.confirm("Are you sure?", function(result) {
-      alert("Confirm result: "+result);
-         }); 
+        var result;
+        bootbox.confirm("Are you sure?", function(result) {
+        alert("Confirm result: "+result);
       
-        //var result = bootbox.confirm("Are you sure?"); 
-
-
-        if (result) {
-            $.ajax({
-                url: "deleteVacationPlan.php",
-                cache: false,
-                async: false,
-                data: { vacationPlanId: $vacationPlanId }
-            })
-                .done(function () {
-                    window.location.href = "vacationSummary.php"
-                });
-        }
+                if (result) {
+                    $.ajax({
+                        url: "deleteVacationPlan.php",
+                        cache: false,
+                        async: false,
+                        data: { vacationPlanId: $vacationPlanId }
+                    })
+                        .done(function () {
+                            window.location.href = "vacationSummary.php"
+                        });
+                }
+        
+           }); 
     }
 
     function addNewDay() {
