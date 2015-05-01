@@ -1,15 +1,109 @@
 <?php
-    require("config.php");
-    if(empty($_SESSION['user']))
-    {
-        header("Location: index.php");
-        die("Redirecting to index.php");
-    }
-    $currentVacationId = $_SESSION['currentVacationId'] ;
-    $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
+require("config.php");
+if (empty($_SESSION['user'])) {
+    header("Location: index.php");
+    die("Redirecting to index.php");
+}
+$currentVacationId = $_SESSION['currentVacationId'];
+$currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
 ?>
 
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIUrVy_InedXDCqKn3QsvuqGDwYdziiGI">
+</script>
+
+<script>
+
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+        if (directionsDisplay) {
+            directionsDisplay.setMap(null);
+        }
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var mapOptions = {
+        }
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+//        document.getElementById("directionsPanel").innerHTML = "";
+        directionsDisplay.setMap(map);
+//        directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+    }
+
+    function calcRoute() {
+
+        var start = document.getElementById("startingLocation").value; //$start; // document.getElementById("origin").value;
+        var end = document.getElementById("endingLocation").value;  // $end; // document.getElementById("destination").value;
+//alert("start "+start);
+//alert("end   "+end);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+
+    function loadTravelResults() {
+//alert("A");
+        initialize();
+//alert("B");
+        calcRoute();
+//alert("C");
+        calculateDistances();
+//alert("D");
+    }
+
+    function calculateDistances() {
+//alert("ZZZ origin.value "+origin.value);
+//alert("ZZZ destination.value "+destination.value);
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix(
+            {
+//        origins: [origin.value],
+//            destinations: [destination.value],
+                origins: [document.getElementById("startingLocation").value],
+                destinations: [document.getElementById("endingLocation").value],
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.IMPERIAL
+            }, callback);
+    }
+
+    function callback(response, status) {
+        if (status != google.maps.DistanceMatrixStatus.OK) {
+            alert('Error was: ' + status);
+        } else {
+            var origins = response.originAddresses;
+            var destinations = response.destinationAddresses;
+//            var distanceResult = document.getElementById('travelDistance');
+//            distanceResult.innerHTML = '42';
+
+            for (var i = 0; i < origins.length; i++) {
+                var results = response.rows[i].elements;
+                if (results[0].status == 'OK') {
+                    for (var j = 0; j < results.length; j++) {
+//                        distanceResult.innerHTML += 'Traveling from ' + origins[i] + ' to ' + destinations[j] + '<br>'
+//                            + 'Distance covered:' + results[j].distance.text + '<br>'
+//                            + 'Travel time:     ' + results[j].duration.text + '<br>';
+                        document.getElementById("travelTime").value =   (Math.round(results[j].duration.value / (60 * 60)*100)/100).toFixed(1);
+                        document.getElementById("travelDistance").value = (Math.round(results[j].distance.value / 1609.34*100)/100).toFixed(1);
+                        // distance.value is in meters,  duration.value is in seconds
+                    }
+                } else {
+                    distanceResult.innerHTML += 'unable to calculate, be sure to have a valid origin and destination';
+                }
+            }
+        }
+    }
+
+</script>
 
 <script>
 
@@ -24,7 +118,7 @@
                 //alert("RESULTS: "+result);
 
                 //decode the JSON object received
-                //  $data['statusDef'] = $colorArray;   $data['vcationPlan'] = $resultArray; 
+                //  $data['statusDef'] = $colorArray;   $data['vcationPlan'] = $resultArray;
                 var dataReturned = JSON.parse(result);
                 document.getElementById("dayDate").value = dataReturned.vcationPlan[0].day_date;
                 document.getElementById("startingLocation").value = dataReturned.vcationPlan[0].starting_location;
@@ -33,23 +127,23 @@
                 document.getElementById("endingLocation").value = dataReturned.vcationPlan[0].ending_location;
                 document.getElementById("morningActivity").value = dataReturned.vcationPlan[0].morning;
                 document.getElementById("afternoonActivity").value = dataReturned.vcationPlan[0].afternoon;
-                document.getElementById("eveningActivity").value =  dataReturned.vcationPlan[0].evening;
+                document.getElementById("eveningActivity").value = dataReturned.vcationPlan[0].evening;
                 document.getElementById("lodging").value = dataReturned.vcationPlan[0].lodging;
-                
-               // alert(dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status]); 
-                document.getElementById("morningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status];  //'blue'; 
+
+                // alert(dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status]);
+                document.getElementById("morningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].morning_status];  //'blue';
                 document.getElementById("afternoonActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].afternoon_status];
                 document.getElementById("eveningActivity").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].evening_status];
                 document.getElementById("lodging").style.backgroundColor = dataReturned['statusDef'][dataReturned.vcationPlan[0].lodging_status];
-                
-                document.getElementById("morning_status").value =  dataReturned.vcationPlan[0].morning_status;
-                document.getElementById("afternoon_status").value =  dataReturned.vcationPlan[0].afternoon_status;
-                document.getElementById("evening_status").value =  dataReturned.vcationPlan[0].evening_status;
-                document.getElementById("lodging_status").value =  dataReturned.vcationPlan[0].lodging_status;
-                
-                document.getElementById("vacDay").value = dataReturned.vcationPlan[0].row_number;  
+
+                document.getElementById("morning_status").value = dataReturned.vcationPlan[0].morning_status;
+                document.getElementById("afternoon_status").value = dataReturned.vcationPlan[0].afternoon_status;
+                document.getElementById("evening_status").value = dataReturned.vcationPlan[0].evening_status;
+                document.getElementById("lodging_status").value = dataReturned.vcationPlan[0].lodging_status;
+
+                document.getElementById("vacDay").value = dataReturned.vcationPlan[0].row_number;
                 document.getElementById("vacation").value = dataReturned['vacationName']['vacation_id'];
-                
+
             });
     }
     function undoEdits($vacationPlanId) {
@@ -65,9 +159,9 @@
 
     function addtext() {
 
-        var newtext =  document.getElementById("morningActivity").value ;  // this will echo out the default value
-        newtext = newtext + ", " + document.getElementById("afternoonActivity").value ;
-        alert( newtext);
+        var newtext = document.getElementById("morningActivity").value;  // this will echo out the default value
+        newtext = newtext + ", " + document.getElementById("afternoonActivity").value;
+        alert(newtext);
 
     }
     function updateVacationPlan() {
@@ -82,7 +176,7 @@
                 travelTime: document.getElementById("travelTime").value,
                 travelDistance: document.getElementById("travelDistance").value,
                 startingLocation: document.getElementById("startingLocation").value,
-                endingLocation:  document.getElementById("endingLocation").value,
+                endingLocation: document.getElementById("endingLocation").value,
                 morningActivity: document.getElementById("morningActivity").value,
                 afternoonActivity: document.getElementById("afternoonActivity").value,
                 eveningActivity: document.getElementById("eveningActivity").value,
@@ -94,61 +188,67 @@
             },
             dataType: 'html'
         })
-        .done(function (html) {
+            .done(function (html) {
                 window.location.href = "vacationSummary.php";
             })
-    .fail(jqXHR, textStatus, errorThrown);// {
- //           alert("failed");
- //       });
+            .fail(jqXHR, textStatus, errorThrown);// {
     }
 </script>
 <script>
     function setStatus(status, boxID, statusBoxID) {
 
-        var color; 
-        
+        var color;
+
         switch (status)  // temporoary - really vant to get vals from database
         {
-           case 1: color = 'FF3333';  break;
-           case 2: color = 'FFE16A'; break;
-           case 3: color = '70DB70'; break;
-           case 4: color = '9ae59a'; break;
-           default:
-             alert('Default case');
-             break;
-       }
-       document.getElementById(boxID).style.backgroundColor = color;
-       document.getElementById(statusBoxID).value = status;
+            case 1:
+                color = 'FF3333';
+                break;
+            case 2:
+                color = 'FFE16A';
+                break;
+            case 3:
+                color = '70DB70';
+                break;
+            case 4:
+                color = '9ae59a';
+                break;
+            default:
+                alert('Default case');
+                break;
+        }
+        document.getElementById(boxID).style.backgroundColor = color;
+        document.getElementById(statusBoxID).value = status;
     }
 </script>
 <script>
-function mapIt()  {
-    alert("in mapIt function   "+document.getElementById("startingLocation").value);
-           $.ajax({
+    function mapIt() {
+        alert("in mapIt function   " + document.getElementById("startingLocation").value);
+        $.ajax({
             type: "GET",
             url: "mapIt.php",
             cache: false,
             async: false,
             data: {
-                 startingLocation: document.getElementById("startingLocation").value,
-                 endingLocation:   document.getElementById("endingLocation").value,
+                startingLocation: document.getElementById("startingLocation").value,
+                endingLocation: document.getElementById("endingLocation").value,
             },
             dataType: 'html'
         })
-        .done(function (html) {
-            alert("back from map");
-           // window.location.href = "enterDayDetails.php";
-        });
+            .done(function (html) {
+                alert("back from map");
+                // window.location.href = "enterDayDetails.php";
+            });
 
-}
+    }
 </script>
 <script>
-function mapIt2()  {
-    alert("in mapIt2 function");
-   var start = document.getElementById("startingLocation").value;
-   var end = document.getElementById("endingLocation").value;
-   var args = "startingLocation="+start+"&endingLocation="+end;
-   window.location.href = "mapIt.php?"+args;
+    function mapIt2() {
+        alert("in mapIt2 function");
+        var start = document.getElementById("startingLocation").value;
+        var end = document.getElementById("endingLocation").value;
+        var args = "startingLocation=" + start + "&endingLocation=" + end;
+        window.location.href = "mapIt.php?" + args;
     }
 </script>
 
@@ -160,152 +260,204 @@ function mapIt2()  {
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
-   <!-- <script src="script.js"></script>  -->
+    <!-- <script src="script.js"></script>  -->
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
-        body { background: url(images/bglight.png); }
-        .hero-unit { background-color: #fff; }
-        .center { display: block; margin: 0 auto; }
+        body {
+            background: url(images/bglight.png);
+        }
+
+        .hero-unit {
+            background-color: #fff;
+        }
+
+        .center {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
-    
+
+    <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+
 </head>
 
 <!--<body>-->
 
 <div class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a href="welcome.php" class="brand">Vacation</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <!--<li><a href="register.php">Register</a></li>-->
-          <li class="divider-vertical"></li>
-          <li><a href="logout.php">Log Out</a></li>
-        </ul>
-      </div>
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a href="welcome.php" class="brand">Vacation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                    <!--<li><a href="register.php">Register</a></li>-->
+                    <li class="divider-vertical"></li>
+                    <li><a href="logout.php">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
- <div class="container hero-unit" id="divX">  
-     <body>
+<div class="container hero-unit" id="divX">
+    <body>
 
-  <!--  (select day id is // <?php echo htmlentities($_SESSION['currentVacationDay'], ENT_QUOTES, 'UTF-8'); ?>   -->
-   </br> </br> </br> 
-   <h4> status color codes: </h4>
-     <p>
-        <button type="button" class="btn btn-success"> </button> activity/lodging reservation confirmed <br>
-        <button type="button" class="btn btn-warning"> </button> activity/lodging reservation needs confirmation <br>
-        <button type="button" class="btn btn-danger"> </button> activity/lodging reservation not made <br>
-     </p> <br><br>
-     <h3> Enter/edit information for 
-     Day: <textarea readonly maxlength="3" id="vacDay" name="vacDay" rows="1" cols="6" style="font-weight: bold" > </textarea > 
-     of Vacation:  <textarea readonly  id="vacation" name="vacation" rows="1" cols="24" style="font-weight: bold" > </textarea >  </h3> <br>
-        
-   <form name="myForm" id="myForm" action="setDayDetails.php" method="GET"> 
-        date: <input readonly id="dayDate" name="dayDate" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
-        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /> .    .      
-        endingLocation: <input id="endingLocation"  name="endingLocation" size="15" type="text"  style="background-color:#FCF5D8;" /><br><br>
-        travelDistance:<input id="travelDistance"  name="travelDistance" size="15" type="text"  style="background-color:#FCF5D8;" /> .       .
-        travelTime: <input id="travelTime"  name="travelTime" size="15" type="text"  style="background-color:#FCF5D8;" />
+    <!--  (select day id is // <?php echo htmlentities($_SESSION['currentVacationDay'], ENT_QUOTES, 'UTF-8'); ?>   -->
+    </br> </br> </br>
+    <h4> status color codes: </h4>
+
+    <p>
+        <button type="button" class="btn btn-success"></button>
+        activity/lodging reservation confirmed <br>
+        <button type="button" class="btn btn-warning"></button>
+        activity/lodging reservation needs confirmation <br>
+        <button type="button" class="btn btn-danger"></button>
+        activity/lodging reservation not made <br>
+    </p>
+    <br><br>
+
+    <h3> Enter/edit information for
+        Day: <textarea readonly maxlength="3" id="vacDay" name="vacDay" rows="1" cols="6"
+                       style="font-weight: bold"> </textarea>
+        of Vacation: <textarea readonly id="vacation" name="vacation" rows="1" cols="24"
+                               style="font-weight: bold"> </textarea></h3> <br>
+
+    <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">
+        date: <input readonly id="dayDate" name="dayDate" size="15" type="text"
+                     style="background-color:#FCF5D8;"/><br><br>
+        startingLocation: <input id="startingLocation" name="startingLocation" size="15" type="text"
+                                 style="background-color:#FCF5D8; margin-right: 30px"/>
+        endingLocation: <input id="endingLocation" name="endingLocation" size="15" type="text"
+                               style="background-color:#FCF5D8;"/><br><br>
+        travelDistance:<input id="travelDistance" name="travelDistance" size="15" type="text"
+                              style="background-color:#FCF5D8; margin-right: 30px"/>
+        travelTime: <input id="travelTime" name="travelTime" size="15" type="text" style="background-color:#FCF5D8;"/>
         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>  -->
-          <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'" >  Working Compute travel Distance </button> 
-          <button type="button" class="btn btn-primary btn-lg" onclick="mapIt2();" >  mapIt2() </button> 
-          <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();" > Broken  Compute travel Distance </button> 
+<!--        <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'"> Working Compute-->
+<!--            travel Distance-->
+<!--        </button>-->
+<!--        <button type="button" class="btn btn-primary btn-lg" onclick="mapIt2();"> mapIt2()</button>-->
+<!--        <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();"> Broken Compute travel Distance</button>-->
+        <button type="button" class="btn btn-primary btn-lg" onclick="loadTravelResults()">Calculate</button>
 
-</button>
-        <br><br>
+<!--        </button>-->
+        <br>
+
+        <div id="map-canvas" style="float:left;width:50%; height:25%"></div>
 
         <br>
 
-        morningActivity: <textarea  id="morningActivity" name="morningActivity" ROWS=4 COLS=60 style="background-color:#FCF5D8;" > </textarea > 
-            <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'morningActivity','morning_status');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'morningActivity','morning_status');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'morningActivity','morning_status');">. </button>
-            </div>
-        <input type="hidden"  id="morning_status" name="morning_status" value="testValue" style="color:blue" >
+        morningActivity: <textarea id="morningActivity" name="morningActivity" ROWS=4 COLS=60
+                                   style="background-color:#FCF5D8;"> </textarea>
+
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <button type="button" class="btn btn-success" onclick="setStatus(3,'morningActivity','morning_status');">.
+            </button>
+            <button type="button" class="btn btn-warning" onclick="setStatus(2,'morningActivity','morning_status');">.
+            </button>
+            <button type="button" class="btn btn-danger" onclick="setStatus(1,'morningActivity','morning_status');">.
+            </button>
+        </div>
+        <input type="hidden" id="morning_status" name="morning_status" value="testValue" style="color:blue">
         <br> <br>
-        afternoonActivity: <textarea  id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
-            <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'afternoonActivity','afternoon_status');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'afternoonActivity','afternoon_status');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'afternoonActivity','afternoon_status');">. </button>
-            </div>
-        <input type="hidden"  id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue" >
+        afternoonActivity: <textarea id="afternoonActivity" name="afternoonActivity" ROWS=3 COLS=30
+                                     style="background-color:#FCF5D8;"> </textarea>
+
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <button type="button" class="btn btn-success"
+                    onclick="setStatus(3,'afternoonActivity','afternoon_status');">.
+            </button>
+            <button type="button" class="btn btn-warning"
+                    onclick="setStatus(2,'afternoonActivity','afternoon_status');">.
+            </button>
+            <button type="button" class="btn btn-danger" onclick="setStatus(1,'afternoonActivity','afternoon_status');">
+                .
+            </button>
+        </div>
+        <input type="hidden" id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue">
         <br><br>
-        eveningActivity: <textarea  id="eveningActivity" name="eveningActivity"  ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
-            <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'eveningActivity','evening_status');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'eveningActivity','evening_status');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'eveningActivity','evening_status');">. </button>
-            </div>
-        <input type="hidden"  id="evening_status" name="evening_status" value="testValue" style="color:blue" >
+        eveningActivity: <textarea id="eveningActivity" name="eveningActivity" ROWS=3 COLS=30
+                                   style="background-color:#FCF5D8;"> </textarea>
+
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <button type="button" class="btn btn-success" onclick="setStatus(3,'eveningActivity','evening_status');">.
+            </button>
+            <button type="button" class="btn btn-warning" onclick="setStatus(2,'eveningActivity','evening_status');">.
+            </button>
+            <button type="button" class="btn btn-danger" onclick="setStatus(1,'eveningActivity','evening_status');">.
+            </button>
+        </div>
+        <input type="hidden" id="evening_status" name="evening_status" value="testValue" style="color:blue">
         <br><br>
-        lodging: <textarea  id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea >
-            <div class="btn-group btn-group-sm" role="group" aria-label="...">
-              <button type="button" class="btn btn-success" onclick= "setStatus(3,'lodging','lodging_status');">. </button>
-              <button type="button" class="btn btn-warning" onclick= "setStatus(2,'lodging','lodging_status');">. </button>
-              <button type="button" class="btn btn-danger" onclick= "setStatus(1,'lodging','lodging_status');">. </button>
-            </div>
-        <input type="hidden"  id="lodging_status" name="lodging_status" value="testValue" style="color:blue" >
+        lodging: <textarea id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea>
+
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <button type="button" class="btn btn-success" onclick="setStatus(3,'lodging','lodging_status');">.</button>
+            <button type="button" class="btn btn-warning" onclick="setStatus(2,'lodging','lodging_status');">.</button>
+            <button type="button" class="btn btn-danger" onclick="setStatus(1,'lodging','lodging_status');">.</button>
+        </div>
+        <input type="hidden" id="lodging_status" name="lodging_status" value="testValue" style="color:blue">
         </br> </br> <br> <br>
-     
-        <input name="Save" type="submit" value="Save" onclick="updateVacationPlan(<?php $currentVacationId ?>);"/>  .........
-        <input name="Cancel" type="button" value="Cancel" onclick="undoEdits();"/>  <!--undoEdits  loadEnterDayDetails-->
-      <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
-     </form>
-   
-<!--      <form action="fetchVacationRow.php" method="POST">-->
-<!--           rowID: <input id="fetchRow"  name="fetchRow"  type="text" value="FetchRow"  />  <br><br>-->
-<!--         <input type="submit" value="Submit"/> -->
-<!--      </form>      -->
+
+        <input name="Save" type="submit" value="Save" onclick="updateVacationPlan(<?php $currentVacationId ?>);" style="margin-right: 30px"/>
+        <input name="Cancel" type="button" value="Cancel" onclick="undoEdits();"/> <!--undoEdits  loadEnterDayDetails-->
+        <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
+    </form>
+
+    <!--      <form action="fetchVacationRow.php" method="POST">-->
+    <!--           rowID: <input id="fetchRow"  name="fetchRow"  type="text" value="FetchRow"  />  <br><br>-->
+    <!--         <input type="submit" value="Submit"/> -->
+    <!--      </form>      -->
 
     </body>
- </div>
+</div>
 <!-- Modal -->
-<div class="modal fade" id="modalComputeDistance" tabindex="-1" role="dialog" 
-   aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button>
-            <h4 class="modal-title" id="myModalLabel">
-               This Modal title
-            </h4>
-         </div>
-          
-         <div class="modal-body">
-            Add some text here
-            	<form id="modalForm" name="modalForm">
+<div class="modal fade" id="modalComputeDistance" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    This Modal title
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                Add some text here
+                <form id="modalForm" name="modalForm">
                     <label>Origin:
-                      <input type="text" name="origin" id="origin" required="required" placeholder="starting place" value= startingLocation.value; ?>" />
+                        <input type="text" name="origin" id="origin" required="required" placeholder="starting place"
+                               value=startingLocation.value; ?>" />
                     </label>
                     <label>Destination:
-                      <input type="text" name="destination" id="destination" required="required" placeholder="ending place"  value="" />
+                        <input type="text" name="destination" id="destination" required="required"
+                               placeholder="ending place" value=""/>
                     </label>
                     <label>
-                      <button type="button" onclick="calculateDistances();">Calculate</button>
+                        <button type="button" onclick="calculateDistances();">Calculate</button>
                     </label>
                 </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
-               data-dismiss="modal">Close
-            </button>
-            <button type="button" class="btn btn-primary">
-               Submit changes
-            </button>
-         </div>
-      </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Submit changes
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </html>

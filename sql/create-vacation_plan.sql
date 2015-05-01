@@ -71,14 +71,14 @@ INSERT INTO `vacation_plan` (`vacation_plan_id`, `vacation_id`, `row_number`, `d
 (9, 1, 9, '2014-07-19', '6', '11', 'Vernal, UT', 'Laramie, WY', 'Dinosaur National Monument raft trip Don Hatch Rafting', 3, 'Dinosaur National Monument raft trip Don Hatch Rafting', 3, 'travel', 3, 'Laramie KOA 800-562-4153', 3),
 (10, 1, 10, '2014-07-20', '3', '11', 'Casper, WY ', 'Fort Robinson, NE', 'travel', 3, 'Fort Robinson / possible reservation activity', 3, 'Chuckwagon Cookout (call for reservations during morning)', 1, 'Fort Robinson State Park 308-665-2900', 2),
 (11, 1, 11, '2014-07-21', '3', '11', 'Fort Robinson, NE', 'Badlands NP', 'travel', 3, 'Wind Cave / Hot Spring / etc.', 3, 'Badlands NP', 3, 'Badlands/White River KOA 800-562-3897', 2),
-(12, 1, 12, '2014-07-22', '8', '11', 'Badlands NP', 'Eagan', 'Badlands', 3, 'travel', 3, 'home!', 3, 'home', 4),
-(13, 1, 13, '2014-07-23', '0', '11', 'Eagan', 'Eagan', 'relax', 3, 'relax', 3, 'relax', 3, 'home', 4),
+(12, 1, 12, '2014-07-22', '8', '11', 'Badlands NP', 'Eagan', 'Badlands', 3, 'travel', 3, 'home!', 3, 'home', 3),
+(13, 1, 13, '2014-07-23', '0', '11', 'Eagan', 'Eagan', 'relax', 3, 'relax', 3, 'relax', 3, 'home', 3),
 (14, 2, 1, '1987-10-05', '8', '11', 'St Paul', 'Brule Lake BWCA', 'pack and drive', 3, 'drive', 3, 'paddle in', 3, 'Tent on a Brule lake site', 3),
 (15, 2, 2, '1987-10-06', '0', '11', 'Brule Lake', 'Brule Lake BWCA', 'Brule Lake', 3, 'explore', 3, 'campfire', 3, 'Tent on a Brule lake site', 3),
-(16, 2, 3, '1987-10-07', '8', '11', 'Brule Lake', 'St Paul', 'pack and paddle', 3, 'drive', 3, 'drive /  unpack', 3, 'home', 4),
+(16, 2, 3, '1987-10-07', '8', '11', 'Brule Lake', 'St Paul', 'pack and paddle', 3, 'drive', 3, 'drive /  unpack', 3, 'home', 3),
 (17, 3, 1, '1987-10-07', '5', '11', 'Bedrock', 'Jelly Stone Park', 'pack', 3, 'drive', 3, 'unpack - setup camp', 3, 'Jelly Stone Park', 3),
 (18, 3, 2, '1987-10-07', '0', '11', 'Jelly Stone Park', 'Jelly Stone Park', 'breakfast & hike', 3, 'chase Yogi bear ', 2, 'rest', 3, 'Jelly Stone Park', 3),
-(19, 3, 3, '1987-10-07', '5', '11', 'Jelly Stone Park', 'Bedrock', 'set bear traps', 1, 'eat before Yogi wakes up', 3, 'drive home', 3, 'home = Bedrock', 4);
+(19, 3, 3, '1987-10-07', '5', '11', 'Jelly Stone Park', 'Bedrock', 'set bear traps', 1, 'eat before Yogi wakes up', 3, 'drive home', 3, 'home = Bedrock', 3);
 
 --
 -- Indexes for dumped tables
