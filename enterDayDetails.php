@@ -247,7 +247,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
     <body>
 
     <!--  (select day id is // <?php echo htmlentities($_SESSION['currentVacationDay'], ENT_QUOTES, 'UTF-8'); ?>   -->
-    </br> </br> </br>
+    </br>
     <h4> status color codes: </h4>
 
     <p>
@@ -345,8 +345,6 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         <input type="hidden" id="lodging_status" name="lodging_status" value="testValue" style="color:blue">
         </br> </br> <br> <br>
 
-        <input name="Save" type="submit" value="Save" onclick="updateVacationPlan(<?php $currentVacationId ?>);" style="margin-right: 30px"/>
-        <input name="Cancel" type="button" value="Cancel" onclick="undoEdits();"/> <!--undoEdits  loadEnterDayDetails-->
     </form>
 
     <!--      <form action="fetchVacationRow.php" method="POST">-->
