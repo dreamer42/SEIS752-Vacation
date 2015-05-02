@@ -122,7 +122,7 @@
             <button type="button" onclick="createNewVacation()">Create Vacation</button>
         </label>
     </form>
-    <br><br><br> <!--  the breaks make the page long enough so the calendar drops down instead of up, which is better for us! -->
+    <br><br><br><br><br> <!--  the breaks make the page long enough so the calendar drops down instead of up, which is better for us! -->
 </div>
 
 </body>
