@@ -95,23 +95,22 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
             });
     }
     function undoEdits($vacationPlanId) {
-        var result = confirm("Are you sure you want to undo all your edits? Undo will reset the fields to what they were.");
-        if (result) {
-            loadEnterDayDetails();
-        }
+    //    var result = confirm("Are you sure you want to undo all your edits? Undo will reset the fields to what they were.");
+    //    if (result) {
+    //        loadEnterDayDetails();
+    //    }
+            var result;
+            bootbox.confirm("Are you sure you want to undo all your edits? Undo will reset the fields to what they were.", function(result) {
+                if (result) {
+                    loadEnterDayDetails();
+                }
+           }); 
     }
 
 </script>
 
 <script>
 
-    function addtext() {
-
-        var newtext = document.getElementById("morningActivity").value;  // this will echo out the default value
-        newtext = newtext + ", " + document.getElementById("afternoonActivity").value;
-        alert(newtext);
-
-    }
     function updateVacationPlan() {
 
         $.ajax({
@@ -205,8 +204,9 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
-    <!-- <script src="script.js"></script>  -->
+    <script src="libs/bootbox.min.js"></script> 
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css"> 
     <style type="text/css">
         body {
             background: url(images/bglight.png);
@@ -351,7 +351,6 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
         <input name="Save" type="submit" value="Save" onclick="updateVacationPlan(<?php $currentVacationId ?>);" style="margin-right: 30px"/>
         <input name="Cancel" type="button" value="Cancel" onclick="undoEdits();"/> <!--undoEdits  loadEnterDayDetails-->
-        <!-- <input name="Submit" type="submit" value="Submit" onclick="addtext();"/>  -->
     </form>
 
     <!--      <form action="fetchVacationRow.php" method="POST">-->

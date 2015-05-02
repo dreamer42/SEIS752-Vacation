@@ -37,11 +37,8 @@
     }
 
     function deleteDay($vacationPlanId) {
-      //  var result = confirm("Are you sure you want to delete this day?");
         var result;
-        bootbox.confirm("Are you sure?", function(result) {
-        alert("Confirm result: "+result);
-      
+        bootbox.confirm("Are you sure you want to delete this day?", function(result) {
                 if (result) {
                     $.ajax({
                         url: "deleteVacationPlan.php",
@@ -53,7 +50,6 @@
                             window.location.href = "vacationSummary.php"
                         });
                 }
-        
            }); 
     }
 
