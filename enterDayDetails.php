@@ -15,60 +15,14 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
 <script>
 
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
-    var map;
-
-    function initialize() {
-        if (directionsDisplay) {
-            directionsDisplay.setMap(null);
-        }
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        var mapOptions = {
-        }
-        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-//        document.getElementById("directionsPanel").innerHTML = "";
-        directionsDisplay.setMap(map);
-//        directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-    }
-
-    function calcRoute() {
-
-        var start = document.getElementById("startingLocation").value; //$start; // document.getElementById("origin").value;
-        var end = document.getElementById("endingLocation").value;  // $end; // document.getElementById("destination").value;
-//alert("start "+start);
-//alert("end   "+end);
-        var request = {
-            origin: start,
-            destination: end,
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-        var directionsService = new google.maps.DirectionsService();
-        directionsService.route(request, function (response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-            }
-        });
-    }
-
     function loadTravelResults() {
-//alert("A");
-        initialize();
-//alert("B");
-        calcRoute();
-//alert("C");
         calculateDistances();
-//alert("D");
     }
 
     function calculateDistances() {
-//alert("ZZZ origin.value "+origin.value);
-//alert("ZZZ destination.value "+destination.value);
         var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix(
             {
-//        origins: [origin.value],
-//            destinations: [destination.value],
                 origins: [document.getElementById("startingLocation").value],
                 destinations: [document.getElementById("endingLocation").value],
                 travelMode: google.maps.TravelMode.DRIVING,
@@ -82,22 +36,16 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         } else {
             var origins = response.originAddresses;
             var destinations = response.destinationAddresses;
-//            var distanceResult = document.getElementById('travelDistance');
-//            distanceResult.innerHTML = '42';
-
             for (var i = 0; i < origins.length; i++) {
                 var results = response.rows[i].elements;
                 if (results[0].status == 'OK') {
                     for (var j = 0; j < results.length; j++) {
-//                        distanceResult.innerHTML += 'Traveling from ' + origins[i] + ' to ' + destinations[j] + '<br>'
-//                            + 'Distance covered:' + results[j].distance.text + '<br>'
-//                            + 'Travel time:     ' + results[j].duration.text + '<br>';
                         document.getElementById("travelTime").value =   (Math.round(results[j].duration.value / (60 * 60)*100)/100).toFixed(1);
                         document.getElementById("travelDistance").value = (Math.round(results[j].distance.value / 1609.34*100)/100).toFixed(1);
                         // distance.value is in meters,  duration.value is in seconds
                     }
                 } else {
-                    distanceResult.innerHTML += 'unable to calculate, be sure to have a valid origin and destination';
+                    alert('unable to calculate, be sure to have a valid origin and destination');
                 }
             }
         }
@@ -209,9 +157,6 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
                 break;
             case 3:
                 color = '70DB70';
-                break;
-            case 4:
-                color = '9ae59a';
                 break;
             default:
                 alert('Default case');
@@ -348,7 +293,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 <!--        </button>-->
         <br>
 
-        <div id="map-canvas" style="float:left;width:50%; height:25%"></div>
+<!--        <div id="map-canvas" style="float:left;width:50%; height:25%"></div>-->
 
         <br>
 

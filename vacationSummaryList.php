@@ -30,6 +30,7 @@ require("config.php");
                 vacation_id,
                 row_number,
                 day_date,
+                travel_distance,
                 travel_time,
                 starting_location,
                 ending_location,
@@ -55,13 +56,14 @@ require("config.php");
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
     echo '<table class="table table-bordered table-hover">';
-    echo '<thead><tr><td></td><td>Day</td><td>Date</td><td>Travel Time</td><td>Start</td><td>End</td><td>Morning</td><td>Afternoon</td><td>Evening</td><td>Lodging</td></tr></thead>';
+    echo '<thead><tr><td></td><td>Day</td><td>Date</td><td>Travel Distance</td><td>Travel Time</td><td>Start</td><td>End</td><td>Morning</td><td>Afternoon</td><td>Evening</td><td>Lodging</td></tr></thead>';
     echo '<tbody>';
     while($row = $stmt->fetch()){
         echo '<tr>';
         echo '<td><button class="btn btn-danger btn-small" onClick="deleteDay(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-trash"></i></button></td>';
         echo '<td>'.$row['row_number'].'</td>';
         echo '<td>'.$row['day_date'].'</td>';
+        echo '<td>'.$row['travel_distance'].'</td>';
         echo '<td>'.$row['travel_time'].'</td>';
         echo '<td>'.$row['starting_location'].'</td>';
         echo '<td>'.$row['ending_location'].'</td>';
@@ -72,7 +74,7 @@ require("config.php");
         echo '<td><button class="btn btn-primary btn-small" onClick="redirectToEnterDayDetails(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-zoom-in"></i></button></td>';
         echo '</tr>';
     }
-    echo '<tr><td colspan="10"></td><td><button class="btn btn-primary btn-small" onClick="addNewDay(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-plus"></i></button></td></tr>';
+    echo '<tr><td colspan="11"></td><td><button class="btn btn-primary btn-small" onClick="addNewDay(\'' . $row['vacation_plan_id'] . '\')" ><i class="icon-white icon-plus"></i></button></td></tr>';
     echo '</tbody>';
     echo '</table>';
 
