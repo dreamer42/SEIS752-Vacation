@@ -345,6 +345,12 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         <input type="hidden" id="lodging_status" name="lodging_status" value="testValue" style="color:blue">
         </br> </br> <br> <br>
 
+
+        <button  type="submit" class="btn btn-success" onclick="updateVacationPlan(<?php $currentVacationId ?>);"> SAVE </button>
+        your changes,  or ....  
+        <button type="button" class="btn btn-danger" onclick="undoEdits();"> CANCEL </button> them, then re-do your edits, or
+        <button type="button" class="btn btn-warning" onclick='window.location.href = "vacationSummary.php";'> GoBack </button> to VacationPlan.
+        
     </form>
 
     <!--      <form action="fetchVacationRow.php" method="POST">-->
