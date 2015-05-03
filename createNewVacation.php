@@ -116,10 +116,10 @@
             <input type="text" name="vacationName" id="vacationName" value="" />
         </label>
         <label>Start Date:
-            <input type="text" name="startDate" id="startDate" value="" />
+            <input type="text" name="startDate" id="startDate" value=""><i class="icon-calendar"></i></input>
         </label>
         <label>
-            <button type="button" onclick="createNewVacation()">Create Vacation</button>
+            <button class="btn btn-primary btn-large" type="button" onclick="createNewVacation()">Create Vacation</button>
         </label>
     </form>
     <br><br><br><br><br> <!--  the breaks make the page long enough so the calendar drops down instead of up, which is better for us! -->

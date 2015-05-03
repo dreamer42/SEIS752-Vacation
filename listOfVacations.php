@@ -34,30 +34,42 @@ if (empty($_SESSION['user'])) {
             });
     }
 
+    function deleteVacation($vacationId) {
+        var result;
+        bootbox.confirm("Are you sure you want to delete this vacation?", function(result) {
+            if (result) {
+                $.ajax({
+                    url: "deleteVacation.php",
+                    cache: false,
+                    async: false,
+                    data: { vacationId: $vacationId }
+                })
+                    .done(function () {
+                        window.location.href = "listOfVacations.php"
+                    });
+            }
+        });
+    }
+
 </script>
 
 <!doctype html>
 <html lang="en">
 
-<meta charset="utf-8">
-<title>Vacation Welcome</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="libs/bootstrap.min.js"></script>
-<link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
-<style type="text/css">
-    body {
-        background: url(images/bglight.png);
-    }
+<head>
+    <meta charset="utf-8">
+    <title>Vacation Welcome</title>
 
-    .hero-unit {
-        background-color: #fff;
-    }
-
-    .center {
-        display: block;
-        margin: 0 auto;
-    }
-</style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/bootbox.min.js"></script>
+    <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        body { background: url(images/bglight.png); }
+        .hero-unit { background-color: #fff; }
+        .center { display: block; margin: 0 auto; }
+    </style>
 </head>
 
 <body>
@@ -74,7 +86,6 @@ if (empty($_SESSION['user'])) {
 
             <div class="nav-collapse">
                 <ul class="nav pull-right">
-                    <!--<li><a href="register.php">Register</a></li>-->
                     <li class="divider-vertical"></li>
                     <li><a href="logout.php">Log Out</a></li>
                 </ul>
