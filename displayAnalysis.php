@@ -60,6 +60,18 @@ if (empty($_SESSION['user'])) {
                 theAnalysis += "<br>";
                 theAnalysis += "<h4>Your longest travel day traveling from "+longestStartLocation+" to "+longestEndLocation+" on "+longestDay+" with "+longestMiles+" miles traveled over "+longestHours+" hours.";
                 theAnalysis += "<br>";
+
+                if((numberOfHours/numberOfDays).toFixed(1) < 2.5){
+                    theAnalysis += "<h5>Looks like you have a nice relaxing pace set...</h5>";
+                    theAnalysis += "<img src=\"images/tropical-beach-hammock.jpg\" class=\"center\" />"
+                } else if((numberOfHours/numberOfDays).toFixed(1) < 5){
+                    theAnalysis += "<h5>Looks like you have a nice mix of activity and relaxation...</h5>";
+                    theAnalysis += "<img src=\"images/familyRoadTrip.jpg\" class=\"center\" />"
+                } else {
+                    theAnalysis += "<h5>Looks like you have a lot of hours on the road each day, don't forget to enjoy the journey...</h5>";
+                    theAnalysis += "<img src=\"images/oregontrail-died.png\" class=\"center\" />"
+                }
+
                 theAnalysis += "</html>";
                 document.getElementById("TheAnalysis").innerHTML = theAnalysis;
             });
