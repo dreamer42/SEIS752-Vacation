@@ -44,7 +44,12 @@
             die("Redirecting to: welcome.php");
         }
         else{
-            print("Login Failed.");
+            // adding space so it displays below top black bar
+            print("<html>");
+            print("<div class=\"container hero-unit\">");
+            print("<h1>Login Failed!</h1>");
+            print("</div>");
+            print("</html>");
             $submitted_username = htmlentities($_POST['user_name'], ENT_QUOTES, 'UTF-8');
         }
     }
@@ -63,6 +68,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/bootbox.min.js"></script>
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
         body { background: url(images/bglight.png); }
@@ -110,7 +116,7 @@
                     Password:<br />
                     <input type="password" name="password" value="" />
                     <br /><br />
-                    <input type="submit" class="btn btn-info" value="Login" />
+                    <input type="submit" class="btn btn-primary" value="Login" />
                 </form>
             </div>
           </li>
@@ -120,12 +126,15 @@
   </div>
 </div>
 
+<!--<div id="TheListOfVacations" class="container hero-unit"></div>-->
+
+
 <div class="container hero-unit">
     <h1>Welcome to SEIS752 Vacation</h1>
     <p>There are great things to see, but you can't access it just yet!</p>
     <h2>Either login or register</h2>
     <ul>
-        <li>If you have a credentials, just login from the toolbar</li>
+        <li>If you have credentials, just login from the toolbar</li>
         <li>If you're new to the site, please register from the toolbar</li>
     </ul>
     <span id="dummy"></span>

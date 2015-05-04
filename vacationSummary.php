@@ -55,7 +55,7 @@
 
     function addNewDay() {
         $.ajax({
-            url: "getCurrentVacationId.php",    // TODO: new php, vacationSummaryList is just here temp
+            url: "getCurrentVacationId.php",
             cache: false,
             async: false
         })
@@ -132,12 +132,9 @@
 </div>
 
 <div class="container hero-unit">
-    <h2>New cool features on summary coming soon.  For now click details to look at those days.</h2>
-
-    <h3>TODO: make these buttons "cooler" and make the pages they go to functional.</h3>
-
-    <input name="Map" type="submit" value="Map" onclick="goToMap();"/>
-    <input name="Vacation Analyzer" type="submit" value="Analysis" onclick="goToAnalysis();"/>
+    <h2>Learn more about your vacation or work with individual days below.</h2>
+    <button name="Map" class="btn btn-primary btn-large" value="Map" onClick="goToMap()" >Map <i class="icon-white icon-map-marker"></i></button>
+    <button class="btn btn-primary btn-large" value="Analysis" onClick="goToAnalysis()" >Vacation Analyzer <i class="icon-white icon-tasks"></i></button>
 </div>
 
 <div id="TheListOfDays" class="container hero-unit"></div>

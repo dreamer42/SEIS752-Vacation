@@ -159,6 +159,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         document.getElementById(statusBoxID).value = status;
     }
 </script>
+<<<<<<< HEAD
 <script>
     function setStatusQ(status, boxID, statusBoxID) {
         $.ajax({
@@ -211,6 +212,8 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         window.location.href = "mapIt.php?" + args;
     }
 </script>
+=======
+>>>>>>> origin/master
 
 <!doctype html>
 <!-- <html lang="en">   -->
@@ -300,18 +303,9 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         travelDistance:<input id="travelDistance" name="travelDistance" size="15" type="text"
                               style="background-color:#FCF5D8; margin-right: 30px"/>
         travelTime: <input id="travelTime" name="travelTime" size="15" type="text" style="background-color:#FCF5D8;"/>
-        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalComputeDistance">Compute travel Distance </button>  -->
-<!--        <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='mapIt.php'"> Working Compute-->
-<!--            travel Distance-->
-<!--        </button>-->
-<!--        <button type="button" class="btn btn-primary btn-lg" onclick="mapIt2();"> mapIt2()</button>-->
-<!--        <button type="button" class="btn btn-primary btn-lg" onclick="mapIt();"> Broken Compute travel Distance</button>-->
         <button type="button" class="btn btn-primary btn-lg" onclick="loadTravelResults()">Calculate</button>
 
-<!--        </button>-->
         <br>
-
-<!--        <div id="map-canvas" style="float:left;width:50%; height:25%"></div>-->
 
         <br>
 

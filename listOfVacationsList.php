@@ -1,7 +1,6 @@
 <?php
 require("config.php");
 ?>
-<ol>
     <?php
 
     $query = "
@@ -22,10 +21,20 @@ require("config.php");
         $result = $stmt->execute($query_params);
     }
     catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
+    echo '<table class="table table-hover">';
+    echo '<tbody>';
     while($row = $stmt->fetch()){
-        echo '<li><a href="vacationSummary.php" onClick="setCurrentVacationId(\'' . $row['vacation_id'] . '\')" />'.$row['name'];
-        echo "</li>";
+        echo '<tr>';
+        echo '<td width="30"><button class="btn btn-danger btn-small" onClick="deleteVacation(\'' . $row['vacation_id'] . '\')"  style="margin-right: 30px" ><i class="icon-white icon-trash"></i></button></td>';
+        if(empty($row['name'])){
+            echo '<td><a href="vacationSummary.php" onClick="setCurrentVacationId(\'' . $row['vacation_id'] . '\')" />UNNAMED VACATION</td>';
+        }else{
+            echo '<td><a href="vacationSummary.php" onClick="setCurrentVacationId(\'' . $row['vacation_id'] . '\')" />'.$row['name'].'</td>';
+        }
+        echo '</tr>';
     }
+    echo '</tbody>';
+    echo '</table>';
 
     ?>
-</ol>
