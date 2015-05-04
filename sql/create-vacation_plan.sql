@@ -70,7 +70,7 @@ INSERT INTO `vacation_plan` (`vacation_plan_id`, `vacation_id`, `row_number`, `d
 (8, 1, 8, '2014-07-18', '3.8', '227', 'Moab, UT', 'Vernal, UT', 'travel', 3, 'Dinosaur National Monument', 3, 'relax', 3, 'Vernal / Dinosaur land KOA 800-562-7574', 3),
 (9, 1, 9, '2014-07-19', '3.4', '317', 'Vernal, UT', 'Laramie, WY', 'Dinosaur National Monument raft trip Don Hatch Rafting', 3, 'Dinosaur National Monument raft trip Don Hatch Rafting', 3, 'travel', 3, 'Laramie KOA 800-562-4153', 3),
 (10, 1, 10, '2014-07-20', '3.3', '208', 'Laramie, WY', 'Fort Robinson, NE', 'travel', 3, 'Fort Robinson / possible reservation activity', 3, 'Chuckwagon Cookout (call for reservations during morning)', 1, 'Fort Robinson State Park 308-665-2900', 2),
-(11, 1, 11, '2014-07-21', '3.1', '198', 'Fort Robinson, NE', 'Badlands NP', 'travel', 3, 'Wind Cave / Hot Spring / etc.', 3, 'Badlands NP', 3, 'Badlands/White River KOA 800-562-3897', 2),
+(11, 1, 11, '2014-07-21', '3.1', '126.6', 'Fort Robinson, NE', 'Badlands NP', 'travel', 3, 'Wind Cave / Hot Spring / etc.', 3, 'Badlands NP', 3, 'Badlands/White River KOA 800-562-3897', 2),
 (12, 1, 12, '2014-07-22', '7.3', '497', 'Badlands NP', 'Eagan, MN', 'Badlands', 3, 'travel', 3, 'home!', 3, 'home', 3),
 (13, 1, 13, '2014-07-23', '0', '0', 'Eagan, MN', 'Eagan, MN', 'relax', 3, 'relax', 3, 'relax', 3, 'home', 3),
 (14, 2, 1, '1987-10-05', '8', '11', 'St Paul', 'Brule Lake BWCA', 'pack and drive', 3, 'drive', 3, 'paddle in', 3, 'Tent on a Brule lake site', 3),
@@ -78,7 +78,12 @@ INSERT INTO `vacation_plan` (`vacation_plan_id`, `vacation_id`, `row_number`, `d
 (16, 2, 3, '1987-10-07', '8', '11', 'Brule Lake', 'St Paul', 'pack and paddle', 3, 'drive', 3, 'drive /  unpack', 3, 'home', 3),
 (17, 3, 1, '1987-10-07', '5', '11', 'Bedrock', 'Jelly Stone Park', 'pack', 3, 'drive', 3, 'unpack - setup camp', 3, 'Jelly Stone Park', 3),
 (18, 3, 2, '1987-10-07', '0', '11', 'Jelly Stone Park', 'Jelly Stone Park', 'breakfast & hike', 3, 'chase Yogi bear ', 2, 'rest', 3, 'Jelly Stone Park', 3),
-(19, 3, 3, '1987-10-07', '5', '11', 'Jelly Stone Park', 'Bedrock', 'set bear traps', 1, 'eat before Yogi wakes up', 3, 'drive home', 3, 'home = Bedrock', 3);
+(19, 3, 3, '1987-10-07', '5', '11', 'Jelly Stone Park', 'Bedrock', 'set bear traps', 1, 'eat before Yogi wakes up', 3, 'drive home', 3, 'home = Bedrock', 3),
+(20, 4, 1, '2015-05-27', '24.0', '1673.6', 'eagan,mn', 'seattle, wa', '', 2, '', 3, '', 2, '', 3),
+(21, 4, 2, '2015-05-28', '18.9', '1255.3', 'seattle, wa', 'san diego, CA', '', 2, '', 3, '', 2, '', 3),
+(22, 4, 3, '2015-05-29', '40.3', '2813.5', 'san diego, CA', 'key west, fl', '', 3, '', 2, '', 3, '', 2),
+(23, 4, 4, '2015-05-30', '29.1', '1915.6', 'key west, fl', 'acadia national park', '', 2, '', 3, '', 2, '', 3),
+(24, 4, 5, '2015-05-31', '25.1', '1659.7', 'acadia national park', 'eagan,mn', '', 3, '', 2, '', 3, '', 2);
 
 --
 -- Indexes for dumped tables

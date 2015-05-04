@@ -61,7 +61,7 @@
         })
             .done(function ($currentVacationId) {
                 $.ajax({
-                    url: "getNextVacationPlanInfo.php",    // TODO: new php, vacationSummaryList is just here temp
+                    url: "getNextVacationPlanInfo.php",
                     cache: false,
                     async: false,
                     data: { vacationId: $currentVacationId }

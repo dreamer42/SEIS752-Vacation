@@ -16,7 +16,7 @@ $currentVacationId = $_SESSION['currentVacationId'];
 
 <script>
 
-    window.addEventListener('load', loadTravelLocationsInformation, false);
+    window.addEventListener('load', loadTravelResults, false);
 
     var origin;
     var destination;
@@ -25,8 +25,9 @@ $currentVacationId = $_SESSION['currentVacationId'];
     var directionsService = new google.maps.DirectionsService();
     var map;
 
-    function loadTravelLocationsInformation() {
-        loadTravelResults();
+    function loadTravelResults() {
+        initialize();
+        calcRoute();
     }
 
     function initialize() {
@@ -41,7 +42,6 @@ $currentVacationId = $_SESSION['currentVacationId'];
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById("directionsPanel"));
     }
-
 
 
     function calcRoute() {
@@ -68,7 +68,7 @@ $currentVacationId = $_SESSION['currentVacationId'];
         //    REQUEST_DENIED indicates the webpage is not allowed to use the directions service.
         //    UNKNOWN_ERROR indicates a directions request could not be processed due to a server error. The request may succeed if you try again.
 
-        directionsService.route(request, function(response, status) {
+        directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
             } else if (status == google.maps.DirectionsStatus.NOT_FOUND) {
@@ -89,14 +89,7 @@ $currentVacationId = $_SESSION['currentVacationId'];
                 $('#errorMessage').append("Sorry, problem creating map...<br><br>");
             }
         });
-
-
-        }
-
-        function loadTravelResults() {
-            initialize();
-            calcRoute();
-        }
+    }
 
     function getOrigin() {
         $.ajax({
@@ -133,25 +126,24 @@ $currentVacationId = $_SESSION['currentVacationId'];
 
                 var lastWayPoint = "";
 
-                for(var i in wayPointsArray)
-                {
+                for (var i in wayPointsArray) {
                     var currentWayPoint = wayPointsArray[i].wayPoint;
                     // don't want to include same way point multiple times in a row, map is same, but it raises way point count (and license max) sooner
-                    if(currentWayPoint != lastWayPoint){
+                    if (currentWayPoint != lastWayPoint) {
                         wayPoints.push({
-                        location:wayPointsArray[i].wayPoint,
-                        stopover:true});
+                            location: wayPointsArray[i].wayPoint,
+                            stopover: true});
                         lastWayPoint = currentWayPoint;
                     }
                 }
 
                 // remove duplicates of starting location at beginning of trip
-                while(wayPoints[0].location == origin){
+                while (wayPoints[0].location == origin) {
                     wayPoints.splice(0, 1);
                 }
 
                 // remove duplicates of ending location at ending of trip
-                while(wayPoints[wayPoints.length - 1].location == destination){
+                while (wayPoints[wayPoints.length - 1].location == destination) {
                     wayPoints.splice(wayPoints.length - 1, 1);
                 }
             });
@@ -215,11 +207,6 @@ $currentVacationId = $_SESSION['currentVacationId'];
     <button name="goBack" class="btn btn-primary btn-large" value="goBack"
             onClick="parent.location='vacationSummary.php'">Back To Summary
     </button>
-
-    <!--    <button name="Map" class="btn btn-primary btn-large" value="Map" onClick=href="createNewVacation.php" >Map</button>-->
-    <!--    <li class="tab-title"><a href="createNewVacation.php">Create a New Vacation</a></li>-->
-
-
 </div>
 
 <div id="TheMap" class="container hero-unit">
