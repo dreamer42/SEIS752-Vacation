@@ -140,7 +140,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
         var color;
 
-        switch (status)  // temporoary - really vant to get vals from database
+        switch (status)  // temporoary - really want to get vals from database
         {
             case 1:
                 color = 'FF3333';
@@ -157,6 +157,28 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         }
         document.getElementById(boxID).style.backgroundColor = color;
         document.getElementById(statusBoxID).value = status;
+    }
+</script>
+<script>
+    function setStatusQ(status, boxID, statusBoxID) {
+        $.ajax({
+            type: "GET",
+            url: "getColor.php",
+            cache: false,
+            async: false,
+            data: { status_id: status},
+            dataType: 'html'
+        })
+        .done(function (result) {
+            alert(result);
+            //decode the JSON object received
+            var dataReturned = JSON.parse(result);
+            //alert(dataReturned);
+            //alert("dataReturned[status] =  "+dataReturned[status]);
+            document.getElementById(boxID).style.backgroundColor = dataReturned[status];
+            document.getElementById(statusBoxID).value = status;
+        })
+      //  .fail(jqXHR, textStatus, errorThrown);
     }
 </script>
 <script>
@@ -297,11 +319,11 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
                                    style="background-color:#FCF5D8;"> </textarea>
 
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
-            <button type="button" class="btn btn-success" onclick="setStatus(3,'morningActivity','morning_status');">.
+            <button type="button" class="btn btn-success" onclick="setStatusQ(3,'morningActivity','morning_status');">.
             </button>
-            <button type="button" class="btn btn-warning" onclick="setStatus(2,'morningActivity','morning_status');">.
+            <button type="button" class="btn btn-warning" onclick="setStatusQ(2,'morningActivity','morning_status');">.
             </button>
-            <button type="button" class="btn btn-danger" onclick="setStatus(1,'morningActivity','morning_status');">.
+            <button type="button" class="btn btn-danger" onclick="setStatusQ(1,'morningActivity','morning_status');">.
             </button>
         </div>
         <input type="hidden" id="morning_status" name="morning_status" value="testValue" style="color:blue">
@@ -311,14 +333,10 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
 
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
             <button type="button" class="btn btn-success"
-                    onclick="setStatus(3,'afternoonActivity','afternoon_status');">.
-            </button>
+                    onclick="setStatusQ(3,'afternoonActivity','afternoon_status');">.</button>
             <button type="button" class="btn btn-warning"
-                    onclick="setStatus(2,'afternoonActivity','afternoon_status');">.
-            </button>
-            <button type="button" class="btn btn-danger" onclick="setStatus(1,'afternoonActivity','afternoon_status');">
-                .
-            </button>
+                    onclick="setStatusQ(2,'afternoonActivity','afternoon_status');">.</button>
+            <button type="button" class="btn btn-danger" onclick="setStatusQ(1,'afternoonActivity','afternoon_status');">.</button>
         </div>
         <input type="hidden" id="afternoon_status" name="afternoon_status" value="testValue" style="color:blue">
         <br><br>
@@ -326,11 +344,11 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
                                    style="background-color:#FCF5D8;"> </textarea>
 
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
-            <button type="button" class="btn btn-success" onclick="setStatus(3,'eveningActivity','evening_status');">.
+            <button type="button" class="btn btn-success" onclick="setStatusQ(3,'eveningActivity','evening_status');">.
             </button>
-            <button type="button" class="btn btn-warning" onclick="setStatus(2,'eveningActivity','evening_status');">.
+            <button type="button" class="btn btn-warning" onclick="setStatusQ(2,'eveningActivity','evening_status');">.
             </button>
-            <button type="button" class="btn btn-danger" onclick="setStatus(1,'eveningActivity','evening_status');">.
+            <button type="button" class="btn btn-danger" onclick="setStatusQ(1,'eveningActivity','evening_status');">.
             </button>
         </div>
         <input type="hidden" id="evening_status" name="evening_status" value="testValue" style="color:blue">
@@ -338,9 +356,9 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         lodging: <textarea id="lodging" name="lodging" ROWS=3 COLS=30 style="background-color:#FCF5D8;"> </textarea>
 
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
-            <button type="button" class="btn btn-success" onclick="setStatus(3,'lodging','lodging_status');">.</button>
-            <button type="button" class="btn btn-warning" onclick="setStatus(2,'lodging','lodging_status');">.</button>
-            <button type="button" class="btn btn-danger" onclick="setStatus(1,'lodging','lodging_status');">.</button>
+            <button type="button" class="btn btn-success" onclick="setStatusQ(3,'lodging','lodging_status');">.</button>
+            <button type="button" class="btn btn-warning" onclick="setStatusQ(2,'lodging','lodging_status');">.</button>
+            <button type="button" class="btn btn-danger" onclick="setStatusQ(1,'lodging','lodging_status');">.</button>
         </div>
         <input type="hidden" id="lodging_status" name="lodging_status" value="testValue" style="color:blue">
         </br> </br> <br> <br>
