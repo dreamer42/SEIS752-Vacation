@@ -20,6 +20,7 @@ $currentVacationId = $_SESSION['currentVacationId'];
 
     var origin;
     var destination;
+    var wayPoints;
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
@@ -45,66 +46,14 @@ $currentVacationId = $_SESSION['currentVacationId'];
 
     function calcRoute() {
 
-        //var start = document.getElementById("origin").value;
-        //var end = document.getElementById("destination").value;
-
-
-//        var waypts = [];
-//        var checkboxArray = document.getElementById('waypoints');
-//        for (var i = 0; i < checkboxArray.length; i++) {
-//            if (checkboxArray.options[i].selected == true) {
-//                waypts.push({
-//                    location:checkboxArray[i].value,
-//                    stopover:true});
-//            }
-//        }
-//
-//        var request = {
-//            origin: start,
-//            destination: end,
-//            waypoints: waypts,
-
         getOrigin();
         getDestination();
-
-        //var destination = "Portland, ME";
-
-        var wayPoints = [];
-//        wayPoints.push({
-//            location: "yellowstone national park",
-//            stopover: true});
-        wayPoints.push({
-            location: "mesa verde national park",
-            stopover: true});
-        wayPoints.push({
-            location: "great sand dunes national park",
-            stopover: true});
-        wayPoints.push({
-            location: "garden of the gods",
-            stopover: true});
-        wayPoints.push({
-            location: "eagan, mn",
-            stopover: true});
-        wayPoints.push({
-            location: "houghton,mi",
-            stopover: true});
-        wayPoints.push({
-            location:"manistee,mi",
-            stopover:true});
-        wayPoints.push({
-            location:"detroit,mi",
-            stopover:true});
-        wayPoints.push({
-            location:"boston,ma",
-            stopover:true});
-
-
-        //TODO: get waypoints working!!!
+        getWayPoints();
 
         var request = {
             origin: origin,
             destination: destination,
-//            waypoints: wayPoints,
+            waypoints: wayPoints,
             travelMode: google.maps.TravelMode.DRIVING
         };
         var directionsService = new google.maps.DirectionsService();
@@ -168,6 +117,43 @@ $currentVacationId = $_SESSION['currentVacationId'];
         })
             .done(function ($destination) {
                 destination = $destination;
+            });
+    }
+
+    function getWayPoints() {
+        $.ajax({
+            url: "getWayPoints.php",
+            cache: false,
+            async: false
+        })
+            .done(function ($wayPoints) {
+                wayPoints = [];
+
+                var wayPointsArray = JSON.parse($wayPoints);
+
+                var lastWayPoint = "";
+
+                for(var i in wayPointsArray)
+                {
+                    var currentWayPoint = wayPointsArray[i].wayPoint;
+                    // don't want to include same way point multiple times in a row, map is same, but it raises way point count (and license max) sooner
+                    if(currentWayPoint != lastWayPoint){
+                        wayPoints.push({
+                        location:wayPointsArray[i].wayPoint,
+                        stopover:true});
+                        lastWayPoint = currentWayPoint;
+                    }
+                }
+
+                // remove duplicates of starting location at beginning of trip
+                while(wayPoints[0].location == origin){
+                    wayPoints.splice(0, 1);
+                }
+
+                // remove duplicates of ending location at ending of trip
+                while(wayPoints[wayPoints.length - 1].location == destination){
+                    wayPoints.splice(wayPoints.length - 1, 1);
+                }
             });
     }
 
