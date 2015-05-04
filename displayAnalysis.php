@@ -49,12 +49,6 @@ if (empty($_SESSION['user'])) {
                     numberOfHours = parseFloat(numberOfHours) + parseFloat(travel_time);
                     numberOfMiles = parseFloat(numberOfMiles) + parseFloat(travel_distance);
                 }
-                //Number(x1) + "<br>" +
-                alert("days "+numberOfDays+" "+numberOfHours+" "+numberOfMiles);
-
-//                alert("average time "+Math.round(numberOfHours/numberOfDays).toFixed(1));
-//                alert("average distance "+Number(numberOfMiles/numberOfDays));
-
 
                 var theAnalysis = "<html>";
                 theAnalysis += "<h3>Your vacation by the numbers...</h3>";

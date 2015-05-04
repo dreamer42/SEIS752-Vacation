@@ -18,7 +18,18 @@ if (empty($_SESSION['user'])) {
             cache: false
         })
             .done(function (html) {
-                document.getElementById("TheListOfVacations").innerHTML = html;
+                // if we don't find any rows (aka "<tr>") then give the link to create new vacation
+                if (html.indexOf("<tr>") == -1) {
+                    var newVacationLink =
+                        "<h2>Please create a vacation first!</h2>" +
+                        "<ul class=\"tabs\" data-tab>" +
+                        "<li class=\"tab-title\"><a href=\"createNewVacation.php\">Create a New Vacation</a></li>" +
+                        "</ul>";
+                    document.getElementById("TheListOfVacations").innerHTML = newVacationLink;
+                } else {
+                    document.getElementById("TheListOfVacations").innerHTML = html;
+                }
+
             });
     }
 
@@ -36,7 +47,7 @@ if (empty($_SESSION['user'])) {
 
     function deleteVacation($vacationId) {
         var result;
-        bootbox.confirm("Are you sure you want to delete this vacation?", function(result) {
+        bootbox.confirm("Are you sure you want to delete this vacation?", function (result) {
             if (result) {
                 $.ajax({
                     url: "deleteVacation.php",
@@ -66,9 +77,18 @@ if (empty($_SESSION['user'])) {
     <link href="libs/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="libs/bootstrap.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
-        body { background: url(images/bglight.png); }
-        .hero-unit { background-color: #fff; }
-        .center { display: block; margin: 0 auto; }
+        body {
+            background: url(images/bglight.png);
+        }
+
+        .hero-unit {
+            background-color: #fff;
+        }
+
+        .center {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
