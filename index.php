@@ -82,7 +82,7 @@
          //       "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
          //   }
              function playSound() {
-                 var clips = [ 'MinivanClip_1.mp3', 'MinivanClip_1.mp3','DogHowl.mp3' ];
+                 var clips = [ 'MinivanClip_1.mp3', 'MinivanClip_2.mp3', 'MinivanClip_3.mp3', 'MinivanClip_4.mp3','DogHowl.mp3' ];
                  var randomIndex = Math.floor(Math.random() * clips.length);
                  var soundfile = clips[randomIndex];
                  document.getElementById("dummy").innerHTML=
