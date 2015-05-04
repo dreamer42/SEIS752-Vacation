@@ -55,7 +55,7 @@
 
     function addNewDay() {
         $.ajax({
-            url: "getCurrentVacationId.php",    // TODO: new php, vacationSummaryList is just here temp
+            url: "getCurrentVacationId.php",
             cache: false,
             async: false
         })
