@@ -84,9 +84,6 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
                 document.getElementById("afternoon_status").value = dataReturned.vcationPlan[0].afternoon_status;
                 document.getElementById("evening_status").value = dataReturned.vcationPlan[0].evening_status;
                 document.getElementById("lodging_status").value = dataReturned.vcationPlan[0].lodging_status;
-
-                //document.getElementById("vacDay").value = dataReturned.vcationPlan[0].row_number;
-                //document.getElementById("vacation").value = dataReturned['vacationName']['vacation_id'];
                 
                 document.getElementById('DAY_IS').innerHTML = dataReturned.vcationPlan[0].row_number;
                 document.getElementById('VAC_IS').innerHTML = dataReturned['vacationName']['vacation_id'];
@@ -136,7 +133,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
     }
 </script>
 
-<<<<<<< HEAD
+
 <script>
     function setStatusQ(status, boxID, statusBoxID) {
         $.ajax({
@@ -153,7 +150,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
             document.getElementById(boxID).style.backgroundColor = dataReturned[status];
             document.getElementById(statusBoxID).value = status;
         })
-      //  .fail(jqXHR, textStatus, errorThrown);
+
     }
 </script>
 <script>
@@ -186,8 +183,6 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
         window.location.href = "mapIt.php?" + args;
     }
 </script>
-=======
->>>>>>> origin/master
 
 <!doctype html>
 <!-- <html lang="en">   -->
@@ -257,13 +252,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
     <br><h3> Now editing day  <span style="white-space:nowrap" id="DAY_IS">  </span> of vacation <span style="white-space:nowrap" id="VAC_IS">  </span> </h3>
   
     <br/>
-    <!--
-    <h3> Enter/edit information for
-        Day: <textarea readonly maxlength="3" id="vacDay" name="vacDay" rows="1" cols="6"
-                       style="font-weight: bold"> </textarea>
-        of Vacation: <textarea readonly id="vacation" name="vacation" rows="1" cols="24"
-                               style="font-weight: bold"> </textarea></h3> <br>
-    -->
+
     <form name="myForm" id="myForm" action="setDayDetails.php" method="GET">
         date: <input readonly id="dayDate" name="dayDate" size="15" type="text"
                      style="background-color:#FCF5D8;"/><br><br>

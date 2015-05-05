@@ -214,7 +214,7 @@ $currentVacationId = $_SESSION['currentVacationId'];
     <h2 id="errorMessage"></h2>
 
     <div id="map-canvas" style="float:left;width:70%; height:80%"></div>
-    <div id="directionsPanel" style="float:right;width:30%;height 80%"></div>
+    <div id="directionsPanel" style="float:right;width:30%;height:80%"></div>
 
 </div>
 

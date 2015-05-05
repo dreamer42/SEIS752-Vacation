@@ -75,20 +75,16 @@
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
     </style>
-            <script language="javascript" type="text/javascript">
-              var clipIndex;
-        //    function playSound(soundfile) {
-         //     document.getElementById("dummy").innerHTML=
-         //       "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-         //   }
-             function playSound() {
-                 var clips = [ 'MinivanClip_1.mp3', 'MinivanClip_2.mp3', 'MinivanClip_3.mp3', 'MinivanClip_4.mp3','DogHowl.mp3' ];
-                 var randomIndex = Math.floor(Math.random() * clips.length);
-                 var soundfile = clips[randomIndex];
-                 document.getElementById("dummy").innerHTML=
-                    "<embed src=\"sound/"+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-            }
-            </script>
+    <script language="javascript" type="text/javascript">
+      var clipIndex;
+     function playSound() {
+         var clips = [ 'MinivanClip_1.mp3', 'MinivanClip_2.mp3', 'MinivanClip_3.mp3', 'MinivanClip_4.mp3','DogHowl.mp3' ];
+         var randomIndex = Math.floor(Math.random() * clips.length);
+         var soundfile = clips[randomIndex];
+         document.getElementById("dummy").innerHTML=
+            "<embed src=\"sound/"+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+    }
+    </script>
 </head>
 
 <body>
@@ -125,8 +121,6 @@
     </div>
   </div>
 </div>
-
-<!--<div id="TheListOfVacations" class="container hero-unit"></div>-->
 
 
 <div class="container hero-unit">
