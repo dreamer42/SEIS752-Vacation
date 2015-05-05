@@ -4,7 +4,6 @@ ini_set('display_errors', 'on'); error_reporting(-1);
 
 ?>
 <?php
- // 'echo "in fetchVacationRow")';
         $colorQuery = "
             SELECT
               status_id,

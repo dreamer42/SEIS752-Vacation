@@ -4,9 +4,7 @@ ini_set('display_errors', 'on'); error_reporting(-1);
 
 ?>
 <?php
- // 'echo "in fetchVacationRow")';
-     
-        $colorQuery = "
+       $colorQuery = "
             SELECT
               status_id,
               HEXcolor
@@ -21,8 +19,7 @@ ini_set('display_errors', 'on'); error_reporting(-1);
         while($colorRow = $colorStmt->fetch()){
         $colorArray[(string)$colorRow['status_id']] = $colorRow['HEXcolor'];
     }
-       // $colorArray[$row['morning_status']] 
- 
+
    $query = "
             SELECT
                 vacation_plan_id,
@@ -58,13 +55,6 @@ ini_set('display_errors', 'on'); error_reporting(-1);
       $resultArray = array(); 
     while($row = $stmt->fetch()){
       $resultArray[] = $row; //array_map('uft8_encode', $row );
- /*
-       echo $row['vacation_plan_id'];echo'  '; echo $row['vacation_id'];echo'  ';echo $row['row_number'];echo '</br>';
-       echo $row['day_date'];echo'  '; echo $row['travel_time'];echo'  ';echo $row['starting_location'];echo '</br>'; 
-       echo $row['ending_location'];echo'  '; echo $row['morning'];echo'  ';echo $row['morning_status'];echo '</br>';  
-       echo $row['afternoon'];echo'  '; echo $row['afternoon_status'];echo'  ';echo $row['evening'];echo '</br>';  
-       echo $row['evening_status'];echo'  '; echo $row['lodging'];echo'  ';echo $row['lodging_status'];echo '</br>'; 
- */   
     }
     $nameQuery = "SELECT name 
                    FROM `vacations` 

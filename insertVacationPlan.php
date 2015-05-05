@@ -7,9 +7,6 @@ $row_number = $_GET['rowNumber'];
 $day_date = $_GET['dayDate'];
 $starting_location = $_GET['startingLocation'];
 
-//data: { vacationId: $currentVacationId, rowNumber: dataReturned.NEXT_ROW_NUMBER, dayDate:dataReturned.NEXT_DAY_DATE, startingLocation: dataReturned.NEXT_STARTING_LOCATION  }
-
-
 $query = "
             INSERT INTO vacation_plan
                 (`vacation_id`, `row_number`, `day_date`, `starting_location`)

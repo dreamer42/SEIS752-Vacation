@@ -59,12 +59,12 @@ if (empty($_SESSION['user'])) {
                 theAnalysis += "<h4>Average hours traveled per day: "+(numberOfHours/numberOfDays).toFixed(1)+"</h4>";
                 theAnalysis += "<br>";
                 theAnalysis += "<h4>Your longest travel day traveling from "+longestStartLocation+" to "+longestEndLocation+" on "+longestDay+" with "+longestMiles+" miles traveled over "+longestHours+" hours.";
-                theAnalysis += "<br>";
+                theAnalysis += "<br><br>";
 
                 if((numberOfHours/numberOfDays).toFixed(1) < 2.5){
                     theAnalysis += "<h5>Looks like you have a nice relaxing pace set...</h5>";
                     theAnalysis += "<img src=\"images/tropical-beach-hammock.jpg\" class=\"center\" />"
-                } else if((numberOfHours/numberOfDays).toFixed(1) < 5){
+                } else if((numberOfHours/numberOfDays).toFixed(1) < 6){
                     theAnalysis += "<h5>Looks like you have a nice mix of activity and relaxation...</h5>";
                     theAnalysis += "<img src=\"images/familyRoadTrip.jpg\" class=\"center\" />"
                 } else {

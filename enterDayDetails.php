@@ -207,12 +207,7 @@ $currentVacationPlanId = $_SESSION['currentVacationPlanId'];
             margin: 0 auto;
         }
     </style>
-
-    <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-
 </head>
-
-<!--<body>-->
 
 <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">

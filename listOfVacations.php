@@ -5,7 +5,6 @@ if (empty($_SESSION['user'])) {
     die("Redirecting to index.php");
 }
 
-
 ?>
 
 <script>

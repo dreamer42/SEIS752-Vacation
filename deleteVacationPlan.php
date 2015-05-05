@@ -3,7 +3,6 @@ require("config.php");
 ?>
 <?php
 $vacationPlanId = $_GET['vacationPlanId'];
-echo  'yo ' + $vacationPlanId;
 
 // get details about row about to be deleted
 
@@ -27,11 +26,6 @@ catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 $row = $stmt->fetch();
 $vacationId = $row['vacation_id'];
 $rowNumber = $row['row_number'];
-
-echo  'yo ' + $vacationId;
-echo  'yo ' + $rowNumber;
-
-
 
 // delete the row
 
